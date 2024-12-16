@@ -65,7 +65,7 @@ This project is licensed under the MIT License - see the [LICENSE](#) file for d
 
 ## Contact 📬
 
-For any inquiries or feedback, please reach out to [your-email@example.com](mailto:usmanisofficial@outlook.com).
+For any inquiries or feedback, please reach out to [usmanisofficial@outlook.com](mailto:usmanisofficial@outlook.com).
 
 ---
 
