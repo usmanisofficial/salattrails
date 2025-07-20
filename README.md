@@ -38,16 +38,20 @@ SalatTrails helps Muslims track their spiritual journey by documenting the mosqu
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React Native with Expo
+- **Frontend:** React Native with Expo (SDK 53)
+- **Navigation:** Expo Router (file-based routing)
 - **Backend:** Firebase (Authentication, Firestore, Storage)
+- **Authentication:** Firebase Email/Password Authentication
+- **State Management:** React Context + AsyncStorage
+- **Package Manager:** Bun
 - **Maps:** react-native-maps
-- **State Management:** Redux Toolkit
 - **Additional Libraries:**
   - `expo-location` - Precise location tracking
   - `expo-image-picker` - Photo and video uploads
   - `expo-camera` - Camera functionality
-  - `@react-navigation/native` - Navigation
+  - `@react-native-async-storage/async-storage` - Local data persistence
   - `react-native-vector-icons` - Icons
+  - `firebase` - Firebase Web SDK for authentication
 
 ## 🚀 Getting Started
 
@@ -70,24 +74,41 @@ SalatTrails helps Muslims track their spiritual journey by documenting the mosqu
 2. **Install dependencies**
 
    ```bash
-   npm install
+   bun install
    # or
-   yarn install
+   npm install
    ```
 
 3. **Set up Firebase**
 
-   - Create a Firebase project
-   - Enable Authentication, Firestore, and Storage
-   - Add your Firebase configuration to `app/config/firebase.js`
+   - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+   - Enable Authentication with Email/Password provider
+   - Enable Firestore Database
+   - Enable Storage (if needed)
+   - Copy your Firebase config to `config/firebase.ts`
 
-4. **Start the development server**
+4. **Environment Variables (Optional)**
+
+   Create a `.env` file in the root directory:
+
+   ```env
+   FIREBASE_API_KEY=your_api_key
+   FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+   FIREBASE_PROJECT_ID=your_project_id
+   FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+   FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+   FIREBASE_APP_ID=your_app_id
+   ```
+
+5. **Start the development server**
 
    ```bash
+   bun run expo start
+   # or
    npx expo start
    ```
 
-5. **Run on device/simulator**
+6. **Run on device/simulator**
    - Press `i` for iOS simulator
    - Press `a` for Android emulator
    - Scan QR code with Expo Go app on your device
@@ -96,31 +117,75 @@ SalatTrails helps Muslims track their spiritual journey by documenting the mosqu
 
 ```
 salattrails/
-├── app/
+├── app/                     # Main application directory (Expo Router)
 │   ├── _layout.tsx          # Root layout component
 │   ├── index.tsx            # Entry point
+│   ├── (auth)/              # Authentication screens
+│   │   ├── _layout.tsx      # Auth layout
+│   │   ├── login.tsx        # Login screen
+│   │   ├── register.tsx     # Registration screen
+│   │   └── forgot-password.tsx # Password reset screen
+│   ├── (tabs)/              # Main app tabs
+│   │   ├── _layout.tsx      # Tab layout
+│   │   ├── index.tsx        # Home tab
+│   │   ├── discover.tsx     # Discover tab
+│   │   ├── map.tsx          # Map tab
+│   │   ├── community.tsx    # Community tab
+│   │   └── profile.tsx      # Profile tab
 │   ├── components/          # Reusable components
-│   │   ├── Map/
-│   │   ├── Profile/
-│   │   └── Common/
-│   ├── screens/             # Screen components
-│   │   ├── HomeScreen.tsx
-│   │   ├── ProfileScreen.tsx
-│   │   └── MapScreen.tsx
+│   │   ├── Map/             # Map-related components
+│   │   ├── Profile/         # Profile-related components
+│   │   └── Common/          # Common UI components
+│   ├── config/              # Configuration files
+│   ├── screens/             # Additional screen components
 │   ├── services/            # API and external services
-│   │   ├── firebase.ts
-│   │   └── location.ts
 │   ├── store/               # State management
-│   │   ├── slices/
-│   │   └── index.ts
-│   └── utils/               # Utility functions
+│   │   └── {slices}/        # Redux slices
+│   ├── utils/               # Utility functions
+│   ├── add-mosque.tsx       # Add mosque screen
+│   ├── edit-profile.tsx     # Edit profile screen
+│   ├── mosque-details.tsx   # Mosque details screen
+│   ├── prayer-times.tsx     # Prayer times screen
+│   └── settings.tsx         # Settings screen
 ├── assets/                  # Static assets
-│   ├── images/
-│   └── fonts/
+│   ├── images/              # App images and icons
+│   └── fonts/               # Custom fonts
+├── components/              # Global components
+│   └── LoadingScreen.tsx    # Loading screen component
+├── config/                  # Global configuration
+│   └── firebase.ts          # Firebase configuration
+├── contexts/                # React contexts
+│   └── AuthContext.tsx      # Authentication context
+├── services/                # Global services
+├── app.config.js            # Expo app configuration
 ├── app.json                 # Expo configuration
-├── package.json             # Dependencies
-└── tsconfig.json           # TypeScript configuration
+├── package.json             # Dependencies and scripts
+├── tsconfig.json           # TypeScript configuration
+├── bun.lock                 # Bun lock file
+└── README.md               # Project documentation
 ```
+
+## 🔐 Authentication Features
+
+### ✅ Implemented Features
+
+- **Email/Password Registration** - Create new user accounts
+- **Email/Password Login** - Secure user authentication
+- **Password Reset** - Forgot password functionality
+- **User Profile Management** - Update display name and profile
+- **Session Management** - Automatic login state handling
+- **Error Handling** - User-friendly error messages
+
+### ⚠️ Known Limitations (Expo Go)
+
+- **Session Persistence** - Sessions reset on app restart (Expo Go limitation)
+- **AsyncStorage Warning** - Expected warning in development (doesn't affect functionality)
+
+### 🚀 Production Ready
+
+- **Development Builds** - Full session persistence support
+- **Production Builds** - Complete authentication functionality
+- **Firebase Web SDK** - Compatible with Expo Go and production builds
 
 ## 🎯 Development Guidelines
 
@@ -133,7 +198,7 @@ salattrails/
 
 ### State Management
 
-- **Redux Toolkit:** Use for global state management
+- **React Context:** Use for global state management (AuthContext)
 - **Local State:** React hooks for component-specific state
 - **Persistence:** AsyncStorage for offline data
 
