@@ -42,10 +42,12 @@ SalatTrails helps Muslims track their spiritual journey by documenting the mosqu
 - **Navigation:** Expo Router (file-based routing)
 - **Backend:** Firebase (Authentication, Firestore, Storage)
 - **Authentication:** Firebase Email/Password Authentication
-- **State Management:** React Context + AsyncStorage
+- **State Management:** Redux Toolkit + React Redux
 - **Package Manager:** Bun
 - **Maps:** react-native-maps
 - **Additional Libraries:**
+  - `@reduxjs/toolkit` - Redux state management
+  - `react-redux` - React Redux bindings
   - `expo-location` - Precise location tracking
   - `expo-image-picker` - Photo and video uploads
   - `expo-camera` - Camera functionality
@@ -78,6 +80,8 @@ SalatTrails helps Muslims track their spiritual journey by documenting the mosqu
    # or
    npm install
    ```
+
+   **Note**: The project uses Redux Toolkit and React Redux for state management. These dependencies are already included in the package.json.
 
 3. **Set up Firebase**
 
@@ -139,8 +143,20 @@ salattrails/
 │   ├── config/              # Configuration files
 │   ├── screens/             # Additional screen components
 │   ├── services/            # API and external services
-│   ├── store/               # State management
-│   │   └── {slices}/        # Redux slices
+│   ├── store/               # Redux state management
+│   │   ├── index.ts         # Store configuration
+│   │   ├── hooks.ts         # Typed Redux hooks
+│   │   ├── ReduxProvider.tsx # Redux provider component
+│   │   └── slices/          # Redux slices
+│   │       ├── authSlice.ts      # Authentication state
+│   │       ├── mosqueSlice.ts    # Mosque data management
+│   │       ├── prayerTimesSlice.ts # Prayer times management
+│   │       ├── userSlice.ts      # User profile management
+│   │       ├── themeSlice.ts     # Theme management
+│   │       └── locationSlice.ts  # Location services
+│   ├── hooks/               # Custom hooks
+│   │   ├── useAuth.ts       # Authentication hook
+│   │   └── useTheme.ts      # Theme management hook
 │   ├── utils/               # Utility functions
 │   ├── add-mosque.tsx       # Add mosque screen
 │   ├── edit-profile.tsx     # Edit profile screen
@@ -154,8 +170,8 @@ salattrails/
 │   └── LoadingScreen.tsx    # Loading screen component
 ├── config/                  # Global configuration
 │   └── firebase.ts          # Firebase configuration
-├── contexts/                # React contexts
-│   └── AuthContext.tsx      # Authentication context
+├── contexts/                # Legacy React contexts (deprecated)
+│   └── AuthContext.tsx      # Authentication context (migrated to Redux)
 ├── services/                # Global services
 ├── app.config.js            # Expo app configuration
 ├── app.json                 # Expo configuration
@@ -187,6 +203,271 @@ salattrails/
 - **Production Builds** - Complete authentication functionality
 - **Firebase Web SDK** - Compatible with Expo Go and production builds
 
+## 🗃️ Redux State Management
+
+### Overview
+
+SalatTrails uses Redux Toolkit for comprehensive state management, providing a scalable and predictable way to handle application state.
+
+### Store Structure
+
+The Redux store is organized into six main slices:
+
+#### 🔐 **Auth Slice** (`authSlice.ts`)
+
+- **Purpose**: Manages user authentication state
+- **Features**:
+  - User login/logout/registration
+  - Password reset functionality
+  - Authentication state persistence
+  - Error handling for auth operations
+- **State**:
+  ```typescript
+  {
+    user: User | null,
+    isAuthenticated: boolean,
+    isLoading: boolean,
+    error: string | null
+  }
+  ```
+
+#### 🕌 **Mosque Slice** (`mosqueSlice.ts`)
+
+- **Purpose**: Handles mosque data and search functionality
+- **Features**:
+  - Fetch nearby and popular mosques
+  - Search mosques by name/location
+  - Mosque details management
+  - Filtering and sorting capabilities
+- **State**:
+  ```typescript
+  {
+    mosques: Mosque[],
+    nearbyMosques: Mosque[],
+    popularMosques: Mosque[],
+    selectedMosque: Mosque | null,
+    searchQuery: string,
+    filters: FilterOptions,
+    isLoading: boolean,
+    error: string | null
+  }
+  ```
+
+#### 🕐 **Prayer Times Slice** (`prayerTimesSlice.ts`)
+
+- **Purpose**: Manages prayer times and calculations
+- **Features**:
+  - Automatic prayer time calculations
+  - Next prayer detection
+  - Time until next prayer
+  - Location-based prayer times
+- **State**:
+  ```typescript
+  {
+    prayerTimes: PrayerTime | null,
+    nextPrayer: string | null,
+    timeUntilNextPrayer: string | null,
+    currentLocation: Location | null,
+    date: string,
+    isLoading: boolean,
+    error: string | null
+  }
+  ```
+
+#### 👤 **User Slice** (`userSlice.ts`)
+
+- **Purpose**: Manages user profile and preferences
+- **Features**:
+  - User profile data
+  - Preferences management
+  - Favorite mosques tracking
+  - Visited mosques history
+- **State**:
+  ```typescript
+  {
+    profile: UserProfile | null,
+    isLoading: boolean,
+    isUpdating: boolean,
+    error: string | null
+  }
+  ```
+
+#### 🎨 **Theme Slice** (`themeSlice.ts`)
+
+- **Purpose**: Manages app theming
+- **Features**:
+  - Light/dark/system theme support
+  - Theme persistence
+  - Dynamic theme switching
+  - System theme detection
+- **State**:
+  ```typescript
+  {
+    theme: Theme,
+    themeMode: 'light' | 'dark' | 'system',
+    isDark: boolean,
+    isLoading: boolean,
+    error: string | null
+  }
+  ```
+
+#### 📍 **Location Slice** (`locationSlice.ts`)
+
+- **Purpose**: Handles location services
+- **Features**:
+  - Current location tracking
+  - Location permission management
+  - Last known location persistence
+  - Location-based features
+- **State**:
+  ```typescript
+  {
+    currentLocation: Location | null,
+    lastKnownLocation: Location | null,
+    hasPermission: boolean,
+    isLocationEnabled: boolean,
+    isLoading: boolean,
+    error: string | null
+  }
+  ```
+
+### Custom Hooks
+
+#### `useAuth()`
+
+Provides authentication functionality with Redux state:
+
+```typescript
+const { user, isAuthenticated, isLoading, login, logout } = useAuth();
+```
+
+#### `useTheme()`
+
+Provides theme management functionality:
+
+```typescript
+const { theme, themeMode, setThemeMode } = useTheme();
+```
+
+### Usage Examples
+
+#### Using Redux Hooks
+
+```typescript
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import { fetchNearbyMosques } from '../store/slices/mosqueSlice';
+
+function MyComponent() {
+  const dispatch = useAppDispatch();
+  const { nearbyMosques, isLoading } = useAppSelector((state) => state.mosque);
+  const { theme } = useAppSelector((state) => state.theme);
+
+  useEffect(() => {
+    dispatch(fetchNearbyMosques());
+  }, [dispatch]);
+
+  // Component logic...
+}
+```
+
+#### Using Custom Hooks
+
+```typescript
+import { useAuth } from '../hooks/useAuth';
+import { useTheme } from '../hooks/useTheme';
+
+function LoginScreen() {
+  const { login, isLoading, error } = useAuth();
+  const { theme } = useTheme();
+
+  const handleLogin = async () => {
+    try {
+      await login(email, password);
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  };
+
+  // Component logic...
+}
+```
+
+### Benefits of Redux Implementation
+
+1. **Better Performance**: Shallow equality checks for re-renders
+2. **Developer Tools**: Redux DevTools for debugging
+3. **Predictable State**: Immutable state updates
+4. **Middleware Support**: Easy integration of side effects
+5. **Scalability**: Better for large applications
+6. **Testing**: Easier to test state logic
+7. **TypeScript**: Full type safety throughout
+
+### Migration from Context API
+
+The application has been migrated from React Context API to Redux Toolkit for better state management:
+
+#### Before (Context API)
+
+```typescript
+import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../config/ThemeContext';
+
+function MyComponent() {
+  const { user, login } = useAuth();
+  const { theme } = useTheme();
+  // Component logic...
+}
+```
+
+#### After (Redux)
+
+```typescript
+import { useAuth } from '../hooks/useAuth';
+import { useTheme } from '../hooks/useTheme';
+
+function MyComponent() {
+  const { user, login } = useAuth();
+  const { theme } = useTheme();
+  // Component logic...
+}
+```
+
+#### Key Changes
+
+- **AuthContext** → **authSlice** + **useAuth hook**
+- **ThemeContext** → **themeSlice** + **useTheme hook**
+- **Provider Wrapping** → **ReduxProvider**
+- **State Access** → **useAppSelector** and **useAppDispatch**
+
+## 🚀 Current Status
+
+### ✅ What's Working
+
+- **Redux Implementation**: Complete and functional
+- **Authentication**: Login, register, logout, password reset
+- **Theme Management**: Light/dark/system theme switching
+- **Navigation**: File-based routing with Expo Router
+- **Firebase Integration**: Authentication and database ready
+- **TypeScript**: Full type safety throughout
+- **Development Environment**: Ready for development
+
+### 🔄 In Progress
+
+- **Mosque Data**: Mock data implemented, ready for real API integration
+- **Prayer Times**: Basic structure ready for API integration
+- **Location Services**: Basic structure ready for implementation
+- **User Profiles**: Basic structure ready for enhancement
+
+### 📋 Next Steps
+
+1. **API Integration**: Connect to real mosque and prayer time APIs
+2. **Location Services**: Implement GPS and location tracking
+3. **Map Features**: Add interactive map functionality
+4. **Social Features**: Implement community and sharing features
+5. **Media Upload**: Add photo and video upload capabilities
+6. **Offline Support**: Implement offline data caching
+7. **Push Notifications**: Add prayer time reminders
+
 ## 🎯 Development Guidelines
 
 ### Code Quality
@@ -198,9 +479,11 @@ salattrails/
 
 ### State Management
 
-- **React Context:** Use for global state management (AuthContext)
+- **Redux Toolkit:** Use for global state management
+- **Custom Hooks:** `useAuth()` and `useTheme()` for common functionality
 - **Local State:** React hooks for component-specific state
 - **Persistence:** AsyncStorage for offline data
+- **Async Operations:** Redux Toolkit's `createAsyncThunk` for API calls
 
 ### Security
 
