@@ -11,12 +11,14 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../contexts/AuthContext';
 import { router } from 'expo-router';
+import { useTheme } from './config/ThemeContext';
+import { ThemeToggle } from './components/ThemeToggle';
 
 export default function SettingsScreen() {
   const { logout } = useAuth();
+  const { theme } = useTheme();
   const [notifications, setNotifications] = useState(true);
   const [locationServices, setLocationServices] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
 
   const handleLogout = async () => {
     Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
@@ -51,7 +53,11 @@ export default function SettingsScreen() {
 
           <View style={styles.settingItem}>
             <View style={styles.settingInfo}>
-              <Ionicons name="notifications" size={24} color="#4CAF50" />
+              <Ionicons
+                name="notifications"
+                size={24}
+                color={theme.colors.primary}
+              />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Push Notifications</Text>
                 <Text style={styles.settingDescription}>
@@ -62,14 +68,25 @@ export default function SettingsScreen() {
             <Switch
               value={notifications}
               onValueChange={setNotifications}
-              trackColor={{ false: '#767577', true: '#4CAF50' }}
-              thumbColor={notifications ? '#fff' : '#f4f3f4'}
+              trackColor={{
+                false: theme.colors.textSecondary,
+                true: theme.colors.primary,
+              }}
+              thumbColor={
+                notifications
+                  ? theme.colors.secondary
+                  : theme.colors.backgroundSecondary
+              }
             />
           </View>
 
           <View style={styles.settingItem}>
             <View style={styles.settingInfo}>
-              <Ionicons name="location" size={24} color="#4CAF50" />
+              <Ionicons
+                name="location"
+                size={24}
+                color={theme.colors.primary}
+              />
               <View style={styles.settingText}>
                 <Text style={styles.settingTitle}>Location Services</Text>
                 <Text style={styles.settingDescription}>
@@ -80,30 +97,22 @@ export default function SettingsScreen() {
             <Switch
               value={locationServices}
               onValueChange={setLocationServices}
-              trackColor={{ false: '#767577', true: '#4CAF50' }}
-              thumbColor={locationServices ? '#fff' : '#f4f3f4'}
+              trackColor={{
+                false: theme.colors.textSecondary,
+                true: theme.colors.primary,
+              }}
+              thumbColor={
+                locationServices
+                  ? theme.colors.secondary
+                  : theme.colors.backgroundSecondary
+              }
             />
           </View>
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Appearance</Text>
-
-          <View style={styles.settingItem}>
-            <View style={styles.settingInfo}>
-              <Ionicons name="moon" size={24} color="#4CAF50" />
-              <View style={styles.settingText}>
-                <Text style={styles.settingTitle}>Dark Mode</Text>
-                <Text style={styles.settingDescription}>Use dark theme</Text>
-              </View>
-            </View>
-            <Switch
-              value={darkMode}
-              onValueChange={setDarkMode}
-              trackColor={{ false: '#767577', true: '#4CAF50' }}
-              thumbColor={darkMode ? '#fff' : '#f4f3f4'}
-            />
-          </View>
+          <ThemeToggle />
         </View>
 
         <View style={styles.section}>

@@ -9,6 +9,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../contexts/AuthContext';
 import { router } from 'expo-router';
+import { theme } from '../config/theme';
 
 export default function ProfileScreen() {
   const { user, logout } = useAuth();
@@ -55,7 +56,7 @@ export default function ProfileScreen() {
             </View>
           </View>
           <TouchableOpacity style={styles.editButton}>
-            <Ionicons name="pencil" size={20} color="#4CAF50" />
+            <Ionicons name="pencil" size={20} color={theme.colors.primary} />
           </TouchableOpacity>
         </View>
 
@@ -81,9 +82,13 @@ export default function ProfileScreen() {
             style={styles.menuItem}
             onPress={() => router.push('/(tabs)/map')}
           >
-            <Ionicons name="map" size={24} color="#4CAF50" />
+            <Ionicons name="map" size={24} color={theme.colors.primary} />
             <Text style={styles.menuText}>My Visited Mosques</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -92,9 +97,13 @@ export default function ProfileScreen() {
               console.log('Opening prayer history...');
             }}
           >
-            <Ionicons name="calendar" size={24} color="#4CAF50" />
+            <Ionicons name="calendar" size={24} color={theme.colors.primary} />
             <Text style={styles.menuText}>Prayer History</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -103,9 +112,13 @@ export default function ProfileScreen() {
               console.log('Opening achievements...');
             }}
           >
-            <Ionicons name="trophy" size={24} color="#4CAF50" />
+            <Ionicons name="trophy" size={24} color={theme.colors.primary} />
             <Text style={styles.menuText}>Achievements</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
         </View>
 
@@ -118,9 +131,17 @@ export default function ProfileScreen() {
               console.log('Opening notifications settings...');
             }}
           >
-            <Ionicons name="notifications" size={24} color="#4CAF50" />
+            <Ionicons
+              name="notifications"
+              size={24}
+              color={theme.colors.primary}
+            />
             <Text style={styles.menuText}>Notifications</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -129,9 +150,17 @@ export default function ProfileScreen() {
               console.log('Opening privacy settings...');
             }}
           >
-            <Ionicons name="shield-checkmark" size={24} color="#4CAF50" />
+            <Ionicons
+              name="shield-checkmark"
+              size={24}
+              color={theme.colors.primary}
+            />
             <Text style={styles.menuText}>Privacy</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -140,9 +169,13 @@ export default function ProfileScreen() {
               console.log('Opening language settings...');
             }}
           >
-            <Ionicons name="language" size={24} color="#4CAF50" />
+            <Ionicons name="language" size={24} color={theme.colors.primary} />
             <Text style={styles.menuText}>Language</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -151,9 +184,17 @@ export default function ProfileScreen() {
               console.log('Opening help & support...');
             }}
           >
-            <Ionicons name="help-circle" size={24} color="#4CAF50" />
+            <Ionicons
+              name="help-circle"
+              size={24}
+              color={theme.colors.primary}
+            />
             <Text style={styles.menuText}>Help & Support</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
         </View>
 
@@ -164,9 +205,13 @@ export default function ProfileScreen() {
             style={styles.menuItem}
             onPress={() => router.push('/edit-profile')}
           >
-            <Ionicons name="person" size={24} color="#4CAF50" />
+            <Ionicons name="person" size={24} color={theme.colors.primary} />
             <Text style={styles.menuText}>Edit Profile</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -175,17 +220,29 @@ export default function ProfileScreen() {
               console.log('Opening change password...');
             }}
           >
-            <Ionicons name="lock-closed" size={24} color="#4CAF50" />
+            <Ionicons
+              name="lock-closed"
+              size={24}
+              color={theme.colors.primary}
+            />
             <Text style={styles.menuText}>Change Password</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.menuItem} onPress={handleLogout}>
-            <Ionicons name="log-out" size={24} color="#e74c3c" />
-            <Text style={[styles.menuText, { color: '#e74c3c' }]}>
+            <Ionicons name="log-out" size={24} color={theme.colors.error} />
+            <Text style={[styles.menuText, { color: theme.colors.error }]}>
               Sign Out
             </Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
         </View>
 
@@ -198,9 +255,17 @@ export default function ProfileScreen() {
               console.log('Opening about SalatTrails...');
             }}
           >
-            <Ionicons name="information-circle" size={24} color="#4CAF50" />
+            <Ionicons
+              name="information-circle"
+              size={24}
+              color={theme.colors.primary}
+            />
             <Text style={styles.menuText}>About SalatTrails</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -209,9 +274,17 @@ export default function ProfileScreen() {
               console.log('Opening terms of service...');
             }}
           >
-            <Ionicons name="document-text" size={24} color="#4CAF50" />
+            <Ionicons
+              name="document-text"
+              size={24}
+              color={theme.colors.primary}
+            />
             <Text style={styles.menuText}>Terms of Service</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -220,9 +293,13 @@ export default function ProfileScreen() {
               console.log('Opening privacy policy...');
             }}
           >
-            <Ionicons name="shield" size={24} color="#4CAF50" />
+            <Ionicons name="shield" size={24} color={theme.colors.primary} />
             <Text style={styles.menuText}>Privacy Policy</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -233,18 +310,18 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: theme.colors.background,
   },
   content: {
     flex: 1,
   },
   header: {
-    backgroundColor: '#fff',
-    padding: 20,
+    backgroundColor: theme.colors.surface,
+    padding: theme.spacing.lg,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: theme.spacing.sm,
   },
   profileInfo: {
     flexDirection: 'row',
@@ -255,87 +332,80 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#4CAF50',
+    backgroundColor: theme.colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 15,
+    marginRight: theme.spacing.md,
   },
   avatarText: {
-    color: '#fff',
-    fontSize: 24,
-    fontWeight: 'bold',
+    color: theme.colors.secondary,
+    fontSize: theme.typography.fontSize['2xl'],
+    fontWeight: theme.typography.fontWeight.bold,
   },
   userInfo: {
     flex: 1,
   },
   userName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 4,
+    fontSize: theme.typography.fontSize.xl,
+    fontWeight: theme.typography.fontWeight.bold,
+    color: theme.colors.text,
+    marginBottom: theme.spacing.xs,
   },
   userEmail: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: theme.typography.fontSize.sm,
+    color: theme.colors.textSecondary,
     marginBottom: 2,
   },
   joinDate: {
-    fontSize: 12,
-    color: '#999',
+    fontSize: theme.typography.fontSize.xs,
+    color: theme.colors.textSecondary,
   },
   editButton: {
-    padding: 10,
+    padding: theme.spacing.sm,
   },
   statsSection: {
     flexDirection: 'row',
-    padding: 15,
-    backgroundColor: '#fff',
-    marginBottom: 10,
+    padding: theme.spacing.md,
+    backgroundColor: theme.colors.surface,
+    marginBottom: theme.spacing.sm,
   },
   statCard: {
     flex: 1,
     alignItems: 'center',
   },
   statNumber: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#4CAF50',
-    marginBottom: 5,
+    fontSize: theme.typography.fontSize['2xl'],
+    fontWeight: theme.typography.fontWeight.bold,
+    color: theme.colors.primary,
+    marginBottom: theme.spacing.xs,
   },
   statLabel: {
-    fontSize: 12,
-    color: '#666',
+    fontSize: theme.typography.fontSize.xs,
+    color: theme.colors.textSecondary,
     textAlign: 'center',
   },
   section: {
-    margin: 15,
+    margin: theme.spacing.md,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    color: '#333',
+    fontSize: theme.typography.fontSize.lg,
+    fontWeight: theme.typography.fontWeight.bold,
+    marginBottom: theme.spacing.md,
+    color: theme.colors.text,
   },
   menuItem: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 8,
+    backgroundColor: theme.colors.surface,
+    padding: theme.spacing.md,
+    borderRadius: theme.borderRadius.lg,
+    marginBottom: theme.spacing.sm,
     flexDirection: 'row',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 3,
+    ...theme.shadows.sm,
   },
   menuText: {
     flex: 1,
-    fontSize: 16,
-    color: '#333',
-    marginLeft: 15,
+    fontSize: theme.typography.fontSize.base,
+    color: theme.colors.text,
+    marginLeft: theme.spacing.md,
   },
 });

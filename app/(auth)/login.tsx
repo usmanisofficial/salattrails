@@ -13,6 +13,7 @@ import {
 import { Link, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../contexts/AuthContext';
+import { theme } from '../config/theme';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -51,7 +52,7 @@ export default function LoginScreen() {
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
-          <Ionicons name="business" size={80} color="#4CAF50" />
+          <Ionicons name="business" size={80} color={theme.colors.primary} />
           <Text style={styles.title}>SalatTrails</Text>
           <Text style={styles.subtitle}>
             Welcome back to your spiritual journey
@@ -146,94 +147,87 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: theme.colors.backgroundSecondary,
   },
   scrollContent: {
     flexGrow: 1,
     justifyContent: 'center',
-    padding: 20,
+    padding: theme.spacing.lg,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: theme.spacing['2xl'],
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#4CAF50',
-    marginTop: 10,
-    marginBottom: 5,
+    fontSize: theme.typography.fontSize['4xl'],
+    fontWeight: theme.typography.fontWeight.bold,
+    color: theme.colors.primary,
+    marginTop: theme.spacing.sm,
+    marginBottom: theme.spacing.xs,
   },
   subtitle: {
-    fontSize: 16,
-    color: '#666',
+    fontSize: theme.typography.fontSize.base,
+    color: theme.colors.textSecondary,
     textAlign: 'center',
   },
   form: {
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    padding: 30,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 8,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.borderRadius.xl,
+    padding: theme.spacing.xl,
+    ...theme.shadows.lg,
   },
   inputGroup: {
-    marginBottom: 20,
+    marginBottom: theme.spacing.lg,
   },
   label: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 8,
+    fontSize: theme.typography.fontSize.base,
+    fontWeight: theme.typography.fontWeight.bold,
+    color: theme.colors.text,
+    marginBottom: theme.spacing.sm,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
-    borderRadius: 12,
+    backgroundColor: theme.colors.backgroundSecondary,
+    borderRadius: theme.borderRadius.lg,
     borderWidth: 1,
-    borderColor: '#e9ecef',
+    borderColor: theme.colors.border,
   },
   inputIcon: {
-    marginLeft: 15,
+    marginLeft: theme.spacing.md,
   },
   input: {
     flex: 1,
-    padding: 15,
-    fontSize: 16,
-    color: '#333',
+    padding: theme.spacing.md,
+    fontSize: theme.typography.fontSize.base,
+    color: theme.colors.text,
   },
   eyeIcon: {
-    padding: 15,
+    padding: theme.spacing.md,
   },
   forgotPassword: {
     alignSelf: 'flex-end',
-    marginBottom: 20,
+    marginBottom: theme.spacing.lg,
   },
   forgotPasswordText: {
-    color: '#4CAF50',
-    fontSize: 14,
-    fontWeight: '600',
+    color: theme.colors.primary,
+    fontSize: theme.typography.fontSize.sm,
+    fontWeight: theme.typography.fontWeight.semibold,
   },
   loginButton: {
-    backgroundColor: '#4CAF50',
-    padding: 15,
-    borderRadius: 12,
+    backgroundColor: theme.colors.primary,
+    padding: theme.spacing.md,
+    borderRadius: theme.borderRadius.lg,
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: theme.spacing.lg,
   },
   loginButtonDisabled: {
-    backgroundColor: '#ccc',
+    backgroundColor: theme.colors.textSecondary,
   },
   loginButtonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    color: '#202020',
+    fontSize: theme.typography.fontSize.lg,
+    fontWeight: theme.typography.fontWeight.bold,
   },
 
   registerContainer: {
@@ -242,12 +236,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   registerText: {
-    color: '#666',
-    fontSize: 16,
+    color: theme.colors.textSecondary,
+    fontSize: theme.typography.fontSize.base,
   },
   registerLink: {
-    color: '#4CAF50',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: theme.colors.primary,
+    fontSize: theme.typography.fontSize.base,
+    fontWeight: theme.typography.fontWeight.bold,
   },
 });

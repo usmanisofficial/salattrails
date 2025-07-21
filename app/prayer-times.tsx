@@ -6,106 +6,238 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from './config/ThemeContext';
 
 export default function PrayerTimesScreen() {
+  const { theme } = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <ScrollView style={styles.content}>
         <View style={styles.header}>
-          <Text style={styles.title}>Prayer Times</Text>
-          <Text style={styles.subtitle}>Today's Prayer Schedule</Text>
+          <Text style={[styles.title, { color: theme.colors.text }]}>
+            Prayer Times
+          </Text>
+          <Text
+            style={[styles.subtitle, { color: theme.colors.textSecondary }]}
+          >
+            Today's Prayer Schedule
+          </Text>
         </View>
 
         <View style={styles.locationInfo}>
-          <Ionicons name="location" size={20} color="#4CAF50" />
-          <Text style={styles.locationText}>Current Location</Text>
+          <Ionicons name="location" size={20} color={theme.colors.primary} />
+          <Text style={[styles.locationText, { color: theme.colors.text }]}>
+            Current Location
+          </Text>
           <TouchableOpacity style={styles.changeLocationButton}>
-            <Text style={styles.changeLocationText}>Change</Text>
+            <Text
+              style={[
+                styles.changeLocationText,
+                { color: theme.colors.primary },
+              ]}
+            >
+              Change
+            </Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.prayerTimesContainer}>
-          <View style={styles.prayerCard}>
+          <View
+            style={[
+              styles.prayerCard,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
             <View style={styles.prayerInfo}>
-              <Ionicons name="sunny" size={24} color="#FF9800" />
-              <Text style={styles.prayerName}>Fajr</Text>
+              <Ionicons name="sunny" size={24} color={theme.colors.warning} />
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Fajr
+              </Text>
             </View>
-            <Text style={styles.prayerTime}>5:30 AM</Text>
+            <Text style={[styles.prayerTime, { color: theme.colors.text }]}>
+              5:30 AM
+            </Text>
           </View>
 
-          <View style={styles.prayerCard}>
+          <View
+            style={[
+              styles.prayerCard,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
             <View style={styles.prayerInfo}>
-              <Ionicons name="sunny" size={24} color="#FFC107" />
-              <Text style={styles.prayerName}>Sunrise</Text>
+              <Ionicons name="sunny" size={24} color={theme.colors.warning} />
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Sunrise
+              </Text>
             </View>
-            <Text style={styles.prayerTime}>7:15 AM</Text>
+            <Text style={[styles.prayerTime, { color: theme.colors.text }]}>
+              7:15 AM
+            </Text>
           </View>
 
-          <View style={styles.prayerCard}>
+          <View
+            style={[
+              styles.prayerCard,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
             <View style={styles.prayerInfo}>
-              <Ionicons name="sunny" size={24} color="#FF5722" />
-              <Text style={styles.prayerName}>Dhuhr</Text>
+              <Ionicons name="sunny" size={24} color={theme.colors.warning} />
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Dhuhr
+              </Text>
             </View>
-            <Text style={styles.prayerTime}>12:30 PM</Text>
+            <Text style={[styles.prayerTime, { color: theme.colors.text }]}>
+              12:30 PM
+            </Text>
           </View>
 
-          <View style={styles.prayerCard}>
+          <View
+            style={[
+              styles.prayerCard,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
             <View style={styles.prayerInfo}>
-              <Ionicons name="sunny" size={24} color="#FF9800" />
-              <Text style={styles.prayerName}>Asr</Text>
+              <Ionicons name="sunny" size={24} color={theme.colors.warning} />
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Asr
+              </Text>
             </View>
-            <Text style={styles.prayerTime}>3:45 PM</Text>
+            <Text style={[styles.prayerTime, { color: theme.colors.text }]}>
+              3:45 PM
+            </Text>
           </View>
 
-          <View style={styles.prayerCard}>
+          <View
+            style={[
+              styles.prayerCard,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
             <View style={styles.prayerInfo}>
-              <Ionicons name="moon" size={24} color="#9C27B0" />
-              <Text style={styles.prayerName}>Maghrib</Text>
+              <Ionicons name="moon" size={24} color={theme.colors.info} />
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Maghrib
+              </Text>
             </View>
-            <Text style={styles.prayerTime}>6:20 PM</Text>
+            <Text style={[styles.prayerTime, { color: theme.colors.text }]}>
+              6:20 PM
+            </Text>
           </View>
 
-          <View style={styles.prayerCard}>
+          <View
+            style={[
+              styles.prayerCard,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
             <View style={styles.prayerInfo}>
-              <Ionicons name="moon" size={24} color="#3F51B5" />
-              <Text style={styles.prayerName}>Isha</Text>
+              <Ionicons name="moon" size={24} color={theme.colors.info} />
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Isha
+              </Text>
             </View>
-            <Text style={styles.prayerTime}>7:45 PM</Text>
+            <Text style={[styles.prayerTime, { color: theme.colors.text }]}>
+              7:45 PM
+            </Text>
           </View>
         </View>
 
         <View style={styles.qiblaSection}>
-          <Text style={styles.sectionTitle}>Qibla Direction</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+            Qibla Direction
+          </Text>
           <View style={styles.qiblaContainer}>
             <View style={styles.compassContainer}>
-              <Ionicons name="compass" size={80} color="#4CAF50" />
+              <Ionicons name="compass" size={80} color={theme.colors.primary} />
               <View style={styles.qiblaArrow}>
-                <Ionicons name="arrow-up" size={30} color="#e74c3c" />
+                <Ionicons
+                  name="arrow-up"
+                  size={30}
+                  color={theme.colors.error}
+                />
               </View>
             </View>
-            <Text style={styles.qiblaText}>Qibla Direction: 45° NE</Text>
+            <Text style={[styles.qiblaText, { color: theme.colors.text }]}>
+              Qibla Direction: 45° NE
+            </Text>
           </View>
         </View>
 
         <View style={styles.settingsSection}>
-          <Text style={styles.sectionTitle}>Settings</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+            Settings
+          </Text>
 
-          <TouchableOpacity style={styles.settingItem}>
-            <Ionicons name="calculator" size={24} color="#4CAF50" />
-            <Text style={styles.settingText}>Calculation Method</Text>
-            <Text style={styles.settingValue}>Muslim World League</Text>
+          <TouchableOpacity
+            style={[
+              styles.settingItem,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
+            <Ionicons
+              name="calculator"
+              size={24}
+              color={theme.colors.primary}
+            />
+            <Text style={[styles.settingText, { color: theme.colors.text }]}>
+              Calculation Method
+            </Text>
+            <Text
+              style={[
+                styles.settingValue,
+                { color: theme.colors.textSecondary },
+              ]}
+            >
+              Muslim World League
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.settingItem}>
-            <Ionicons name="notifications" size={24} color="#4CAF50" />
-            <Text style={styles.settingText}>Prayer Notifications</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+          <TouchableOpacity
+            style={[
+              styles.settingItem,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
+            <Ionicons
+              name="notifications"
+              size={24}
+              color={theme.colors.primary}
+            />
+            <Text style={[styles.settingText, { color: theme.colors.text }]}>
+              Prayer Notifications
+            </Text>
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.settingItem}>
-            <Ionicons name="volume-high" size={24} color="#4CAF50" />
-            <Text style={styles.settingText}>Adhan Sound</Text>
-            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+          <TouchableOpacity
+            style={[
+              styles.settingItem,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
+            <Ionicons
+              name="volume-high"
+              size={24}
+              color={theme.colors.primary}
+            />
+            <Text style={[styles.settingText, { color: theme.colors.text }]}>
+              Adhan Sound
+            </Text>
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={theme.colors.textSecondary}
+            />
           </TouchableOpacity>
         </View>
       </ScrollView>

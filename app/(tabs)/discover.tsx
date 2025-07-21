@@ -8,17 +8,22 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { theme } from '../config/theme';
 
 export default function DiscoverScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
         <View style={styles.searchBox}>
-          <Ionicons name="search" size={20} color="#666" />
+          <Ionicons
+            name="search"
+            size={20}
+            color={theme.colors.textSecondary}
+          />
           <TextInput
             style={styles.searchInput}
             placeholder="Search for mosques..."
-            placeholderTextColor="#999"
+            placeholderTextColor={theme.colors.textSecondary}
           />
         </View>
         <TouchableOpacity
@@ -27,7 +32,7 @@ export default function DiscoverScreen() {
             console.log('Opening filter options...');
           }}
         >
-          <Ionicons name="filter" size={20} color="#4CAF50" />
+          <Ionicons name="filter" size={20} color={theme.colors.primary} />
         </TouchableOpacity>
       </View>
 
@@ -75,7 +80,11 @@ export default function DiscoverScreen() {
                 console.log('Filtering by nearby mosques...');
               }}
             >
-              <Ionicons name="location" size={24} color="#4CAF50" />
+              <Ionicons
+                name="location"
+                size={24}
+                color={theme.colors.primary}
+              />
               <Text style={styles.categoryText}>Nearby</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -84,14 +93,14 @@ export default function DiscoverScreen() {
                 console.log('Filtering by top rated mosques...');
               }}
             >
-              <Ionicons name="star" size={24} color="#4CAF50" />
+              <Ionicons name="star" size={24} color={theme.colors.primary} />
               <Text style={styles.categoryText}>Top Rated</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.categoryCard}
               onPress={() => router.push('/prayer-times')}
             >
-              <Ionicons name="time" size={24} color="#4CAF50" />
+              <Ionicons name="time" size={24} color={theme.colors.primary} />
               <Text style={styles.categoryText}>Prayer Times</Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -100,7 +109,7 @@ export default function DiscoverScreen() {
                 console.log('Opening Qibla direction...');
               }}
             >
-              <Ionicons name="compass" size={24} color="#4CAF50" />
+              <Ionicons name="compass" size={24} color={theme.colors.primary} />
               <Text style={styles.categoryText}>Qibla</Text>
             </TouchableOpacity>
           </View>
@@ -113,94 +122,87 @@ export default function DiscoverScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: theme.colors.background,
   },
   searchContainer: {
     flexDirection: 'row',
-    padding: 15,
-    backgroundColor: '#fff',
+    padding: theme.spacing.md,
+    backgroundColor: theme.colors.surface,
     alignItems: 'center',
   },
   searchBox: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: theme.colors.surface,
     borderRadius: 25,
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    marginRight: 10,
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+    marginRight: theme.spacing.sm,
   },
   searchInput: {
     flex: 1,
-    marginLeft: 10,
-    fontSize: 16,
-    color: '#333',
+    marginLeft: theme.spacing.sm,
+    fontSize: theme.typography.fontSize.base,
+    color: theme.colors.text,
   },
   filterButton: {
-    padding: 10,
+    padding: theme.spacing.sm,
   },
   content: {
     flex: 1,
   },
   section: {
-    margin: 15,
+    margin: theme.spacing.md,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
+    fontSize: theme.typography.fontSize.lg,
+    fontWeight: theme.typography.fontWeight.bold,
+    marginBottom: theme.spacing.sm,
+    color: theme.colors.text,
   },
   mosqueCard: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 10,
+    backgroundColor: theme.colors.surface,
+    padding: theme.spacing.md,
+    borderRadius: theme.borderRadius.lg,
+    marginBottom: theme.spacing.sm,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    ...theme.shadows.md,
   },
   mosqueInfo: {
     flex: 1,
   },
   mosqueName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 5,
+    fontSize: theme.typography.fontSize.base,
+    fontWeight: theme.typography.fontWeight.bold,
+    color: theme.colors.text,
+    marginBottom: theme.spacing.xs,
   },
   mosqueAddress: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: theme.typography.fontSize.sm,
+    color: theme.colors.textSecondary,
     marginBottom: 3,
   },
   mosqueDistance: {
-    fontSize: 12,
-    color: '#4CAF50',
+    fontSize: theme.typography.fontSize.xs,
+    color: theme.colors.primary,
   },
   mosqueRating: {
-    fontSize: 12,
-    color: '#FF9800',
+    fontSize: theme.typography.fontSize.xs,
+    color: theme.colors.warning,
   },
   viewButton: {
-    backgroundColor: '#4CAF50',
-    paddingHorizontal: 15,
-    paddingVertical: 8,
+    backgroundColor: theme.colors.primary,
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
     borderRadius: 20,
   },
   viewButtonText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: 'bold',
+    color: '#202020',
+    fontSize: theme.typography.fontSize.sm,
+    fontWeight: theme.typography.fontWeight.bold,
   },
   categoriesContainer: {
     flexDirection: 'row',
@@ -208,25 +210,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   categoryCard: {
-    backgroundColor: '#fff',
+    backgroundColor: theme.colors.surface,
     width: '48%',
-    padding: 20,
-    borderRadius: 10,
+    padding: theme.spacing.lg,
+    borderRadius: theme.borderRadius.lg,
     alignItems: 'center',
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
+    marginBottom: theme.spacing.sm,
+    ...theme.shadows.md,
   },
   categoryText: {
-    marginTop: 8,
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#333',
+    marginTop: theme.spacing.sm,
+    fontSize: theme.typography.fontSize.sm,
+    fontWeight: theme.typography.fontWeight.bold,
+    color: theme.colors.text,
   },
 });

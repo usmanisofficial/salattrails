@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { Link, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { theme } from '../config/theme';
 import { useAuth } from '../../contexts/AuthContext';
 
 export default function ForgotPasswordScreen() {
@@ -57,7 +58,7 @@ export default function ForgotPasswordScreen() {
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
-          <Ionicons name="lock-open" size={80} color="#4CAF50" />
+          <Ionicons name="lock-open" size={80} color={theme.colors.primary} />
           <Text style={styles.title}>Reset Password</Text>
           <Text style={styles.subtitle}>
             Enter your email address and we'll send you instructions to reset
@@ -111,7 +112,11 @@ export default function ForgotPasswordScreen() {
 
         <View style={styles.infoContainer}>
           <View style={styles.infoCard}>
-            <Ionicons name="information-circle" size={24} color="#4CAF50" />
+            <Ionicons
+              name="information-circle"
+              size={24}
+              color={theme.colors.primary}
+            />
             <View style={styles.infoContent}>
               <Text style={styles.infoTitle}>What happens next?</Text>
               <Text style={styles.infoText}>
@@ -131,85 +136,78 @@ export default function ForgotPasswordScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: theme.colors.backgroundSecondary,
   },
   scrollContent: {
     flexGrow: 1,
     justifyContent: 'center',
-    padding: 20,
+    padding: theme.spacing.lg,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: theme.spacing['2xl'],
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#4CAF50',
-    marginTop: 10,
-    marginBottom: 10,
+    fontSize: theme.typography.fontSize['4xl'],
+    fontWeight: theme.typography.fontWeight.bold,
+    color: theme.colors.primary,
+    marginTop: theme.spacing.sm,
+    marginBottom: theme.spacing.sm,
   },
   subtitle: {
-    fontSize: 16,
-    color: '#666',
+    fontSize: theme.typography.fontSize.base,
+    color: theme.colors.textSecondary,
     textAlign: 'center',
     lineHeight: 24,
-    paddingHorizontal: 20,
+    paddingHorizontal: theme.spacing.lg,
   },
   form: {
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    padding: 30,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 8,
-    marginBottom: 20,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.borderRadius.xl,
+    padding: theme.spacing.xl,
+    ...theme.shadows.lg,
+    marginBottom: theme.spacing.lg,
   },
   inputGroup: {
-    marginBottom: 20,
+    marginBottom: theme.spacing.lg,
   },
   label: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 8,
+    fontSize: theme.typography.fontSize.base,
+    fontWeight: theme.typography.fontWeight.bold,
+    color: theme.colors.text,
+    marginBottom: theme.spacing.sm,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8f9fa',
-    borderRadius: 12,
+    backgroundColor: theme.colors.backgroundSecondary,
+    borderRadius: theme.borderRadius.lg,
     borderWidth: 1,
-    borderColor: '#e9ecef',
+    borderColor: theme.colors.border,
   },
   inputIcon: {
-    marginLeft: 15,
+    marginLeft: theme.spacing.md,
   },
   input: {
     flex: 1,
-    padding: 15,
-    fontSize: 16,
-    color: '#333',
+    padding: theme.spacing.md,
+    fontSize: theme.typography.fontSize.base,
+    color: theme.colors.text,
   },
   resetButton: {
-    backgroundColor: '#4CAF50',
-    padding: 15,
-    borderRadius: 12,
+    backgroundColor: theme.colors.primary,
+    padding: theme.spacing.md,
+    borderRadius: theme.borderRadius.lg,
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: theme.spacing.lg,
   },
   resetButtonDisabled: {
-    backgroundColor: '#ccc',
+    backgroundColor: theme.colors.textSecondary,
   },
   resetButtonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
+    color: '#202020',
+    fontSize: theme.typography.fontSize.lg,
+    fontWeight: theme.typography.fontWeight.bold,
   },
   backToLoginContainer: {
     flexDirection: 'row',
@@ -217,26 +215,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   backToLoginText: {
-    color: '#666',
-    fontSize: 16,
+    color: theme.colors.textSecondary,
+    fontSize: theme.typography.fontSize.base,
   },
   backToLoginLink: {
-    color: '#4CAF50',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: theme.colors.primary,
+    fontSize: theme.typography.fontSize.base,
+    fontWeight: theme.typography.fontWeight.bold,
   },
   infoContainer: {
-    backgroundColor: '#fff',
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 4,
+    backgroundColor: theme.colors.surface,
+    borderRadius: theme.borderRadius.xl,
+    padding: theme.spacing.lg,
+    ...theme.shadows.md,
   },
   infoCard: {
     flexDirection: 'row',
@@ -244,17 +235,17 @@ const styles = StyleSheet.create({
   },
   infoContent: {
     flex: 1,
-    marginLeft: 15,
+    marginLeft: theme.spacing.md,
   },
   infoTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 10,
+    fontSize: theme.typography.fontSize.lg,
+    fontWeight: theme.typography.fontWeight.bold,
+    color: theme.colors.text,
+    marginBottom: theme.spacing.sm,
   },
   infoText: {
-    fontSize: 14,
-    color: '#666',
+    fontSize: theme.typography.fontSize.sm,
+    color: theme.colors.textSecondary,
     lineHeight: 20,
   },
 });

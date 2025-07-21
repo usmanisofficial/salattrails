@@ -13,9 +13,11 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from './config/ThemeContext';
 
 export default function EditProfileScreen() {
   const { user } = useAuth();
+  const { theme } = useTheme();
   const [name, setName] = useState(user?.name || '');
   const [email, setEmail] = useState(user?.email || '');
   const [bio, setBio] = useState('');
@@ -45,41 +47,71 @@ export default function EditProfileScreen() {
 
   return (
     <KeyboardAvoidingView
-      style={styles.container}
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView style={styles.content}>
-        <View style={styles.header}>
+        <View
+          style={[styles.header, { backgroundColor: theme.colors.primary }]}
+        >
           <TouchableOpacity
             style={styles.avatarContainer}
             onPress={handleChangeAvatar}
           >
-            <View style={styles.avatar}>
-              <Text style={styles.avatarText}>
+            <View
+              style={[styles.avatar, { backgroundColor: theme.colors.primary }]}
+            >
+              <Text
+                style={[styles.avatarText, { color: theme.colors.secondary }]}
+              >
                 {name.charAt(0).toUpperCase()}
               </Text>
             </View>
-            <View style={styles.avatarOverlay}>
-              <Ionicons name="camera" size={20} color="#fff" />
+            <View
+              style={[
+                styles.avatarOverlay,
+                {
+                  backgroundColor: theme.colors.secondary,
+                  borderColor: theme.colors.primary,
+                },
+              ]}
+            >
+              <Ionicons
+                name="camera"
+                size={20}
+                color={theme.colors.secondary}
+              />
             </View>
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Edit Profile</Text>
+          <Text style={[styles.headerTitle, { color: theme.colors.text }]}>
+            Edit Profile
+          </Text>
         </View>
 
         <View style={styles.form}>
           <View style={styles.inputGroup}>
-            <Text style={styles.label}>Full Name</Text>
-            <View style={styles.inputContainer}>
+            <Text style={[styles.label, { color: theme.colors.text }]}>
+              Full Name
+            </Text>
+            <View
+              style={[
+                styles.inputContainer,
+                {
+                  backgroundColor: theme.colors.backgroundSecondary,
+                  borderColor: theme.colors.border,
+                },
+              ]}
+            >
               <Ionicons
                 name="person"
                 size={20}
-                color="#666"
+                color={theme.colors.textSecondary}
                 style={styles.inputIcon}
               />
               <TextInput
-                style={styles.input}
+                style={[styles.input, { color: theme.colors.text }]}
                 placeholder="Enter your full name"
-                placeholderTextColor="#999"
+                placeholderTextColor={theme.colors.textSecondary}
                 value={name}
                 onChangeText={setName}
                 autoCapitalize="words"
@@ -178,8 +210,16 @@ export default function EditProfileScreen() {
           </View>
 
           <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-              <Text style={styles.saveButtonText}>Save Changes</Text>
+            <TouchableOpacity
+              style={[
+                styles.saveButton,
+                { backgroundColor: theme.colors.primary },
+              ]}
+              onPress={handleSave}
+            >
+              <Text style={[styles.saveButtonText, { color: '#202020' }]}>
+                Save Changes
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -191,13 +231,11 @@ export default function EditProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   content: {
     flex: 1,
   },
   header: {
-    backgroundColor: '#4CAF50',
     padding: 20,
     alignItems: 'center',
   },
@@ -209,12 +247,10 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: 'rgba(255,255,255,0.2)',
     justifyContent: 'center',
     alignItems: 'center',
   },
   avatarText: {
-    color: '#fff',
     fontSize: 40,
     fontWeight: 'bold',
   },
@@ -222,19 +258,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
-    backgroundColor: '#4CAF50',
     borderRadius: 15,
     width: 30,
     height: 30,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#fff',
   },
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff',
   },
   form: {
     padding: 20,
@@ -245,16 +278,13 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 8,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#e9ecef',
   },
   inputIcon: {
     marginLeft: 15,
@@ -263,7 +293,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     fontSize: 16,
-    color: '#333',
   },
   textArea: {
     height: 100,

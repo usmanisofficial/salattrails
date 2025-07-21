@@ -7,138 +7,384 @@ import {
   Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from './config/ThemeContext';
 
 export default function MosqueDetailsScreen() {
+  const { theme } = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <ScrollView style={styles.content}>
-        <View style={styles.header}>
-          <View style={styles.mosqueImage}>
-            <Ionicons name="business" size={80} color="#fff" />
+        <View
+          style={[styles.header, { backgroundColor: theme.colors.surface }]}
+        >
+          <View
+            style={[
+              styles.mosqueImage,
+              { backgroundColor: theme.colors.primary },
+            ]}
+          >
+            <Ionicons
+              name="business"
+              size={80}
+              color={theme.colors.secondary}
+            />
           </View>
           <View style={styles.mosqueInfo}>
-            <Text style={styles.mosqueName}>Central Mosque</Text>
-            <Text style={styles.mosqueAddress}>
+            <Text style={[styles.mosqueName, { color: theme.colors.text }]}>
+              Central Mosque
+            </Text>
+            <Text
+              style={[
+                styles.mosqueAddress,
+                { color: theme.colors.textSecondary },
+              ]}
+            >
               123 Main Street, City, Country
             </Text>
             <View style={styles.ratingContainer}>
-              <Ionicons name="star" size={16} color="#FFD700" />
-              <Text style={styles.rating}>4.8 (120 reviews)</Text>
+              <Ionicons name="star" size={16} color={theme.colors.warning} />
+              <Text style={[styles.rating, { color: theme.colors.text }]}>
+                4.8 (120 reviews)
+              </Text>
             </View>
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Prayer Times</Text>
-          <View style={styles.prayerTimesGrid}>
-            <View style={styles.prayerTimeItem}>
-              <Text style={styles.prayerName}>Fajr</Text>
-              <Text style={styles.prayerTime}>5:30 AM</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+            Prayer Times
+          </Text>
+          <View
+            style={[
+              styles.prayerTimesGrid,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
+            <View
+              style={[
+                styles.prayerTimeItem,
+                {
+                  backgroundColor: theme.colors.surface,
+                  borderBottomColor: theme.colors.border,
+                },
+              ]}
+            >
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Fajr
+              </Text>
+              <Text
+                style={[styles.prayerTime, { color: theme.colors.primary }]}
+              >
+                5:30 AM
+              </Text>
             </View>
-            <View style={styles.prayerTimeItem}>
-              <Text style={styles.prayerName}>Dhuhr</Text>
-              <Text style={styles.prayerTime}>12:30 PM</Text>
+            <View
+              style={[
+                styles.prayerTimeItem,
+                {
+                  backgroundColor: theme.colors.surface,
+                  borderBottomColor: theme.colors.border,
+                },
+              ]}
+            >
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Dhuhr
+              </Text>
+              <Text
+                style={[styles.prayerTime, { color: theme.colors.primary }]}
+              >
+                12:30 PM
+              </Text>
             </View>
-            <View style={styles.prayerTimeItem}>
-              <Text style={styles.prayerName}>Asr</Text>
-              <Text style={styles.prayerTime}>3:45 PM</Text>
+            <View
+              style={[
+                styles.prayerTimeItem,
+                {
+                  backgroundColor: theme.colors.surface,
+                  borderBottomColor: theme.colors.border,
+                },
+              ]}
+            >
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Asr
+              </Text>
+              <Text
+                style={[styles.prayerTime, { color: theme.colors.primary }]}
+              >
+                3:45 PM
+              </Text>
             </View>
-            <View style={styles.prayerTimeItem}>
-              <Text style={styles.prayerName}>Maghrib</Text>
-              <Text style={styles.prayerTime}>6:20 PM</Text>
+            <View
+              style={[
+                styles.prayerTimeItem,
+                {
+                  backgroundColor: theme.colors.surface,
+                  borderBottomColor: theme.colors.border,
+                },
+              ]}
+            >
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Maghrib
+              </Text>
+              <Text
+                style={[styles.prayerTime, { color: theme.colors.primary }]}
+              >
+                6:20 PM
+              </Text>
             </View>
-            <View style={styles.prayerTimeItem}>
-              <Text style={styles.prayerName}>Isha</Text>
-              <Text style={styles.prayerTime}>7:45 PM</Text>
+            <View
+              style={[
+                styles.prayerTimeItem,
+                {
+                  backgroundColor: theme.colors.surface,
+                  borderBottomColor: theme.colors.border,
+                },
+              ]}
+            >
+              <Text style={[styles.prayerName, { color: theme.colors.text }]}>
+                Isha
+              </Text>
+              <Text
+                style={[styles.prayerTime, { color: theme.colors.primary }]}
+              >
+                7:45 PM
+              </Text>
             </View>
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Facilities</Text>
-          <View style={styles.facilitiesContainer}>
-            <View style={styles.facilityItem}>
-              <Ionicons name="water" size={20} color="#4CAF50" />
-              <Text style={styles.facilityText}>Wudu Area</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+            Facilities
+          </Text>
+          <View
+            style={[
+              styles.facilitiesContainer,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
+            <View
+              style={[
+                styles.facilityItem,
+                { backgroundColor: theme.colors.surface },
+              ]}
+            >
+              <Ionicons name="water" size={20} color={theme.colors.primary} />
+              <Text style={[styles.facilityText, { color: theme.colors.text }]}>
+                Wudu Area
+              </Text>
             </View>
-            <View style={styles.facilityItem}>
-              <Ionicons name="car" size={20} color="#4CAF50" />
-              <Text style={styles.facilityText}>Parking</Text>
+            <View
+              style={[
+                styles.facilityItem,
+                { backgroundColor: theme.colors.surface },
+              ]}
+            >
+              <Ionicons name="car" size={20} color={theme.colors.primary} />
+              <Text style={[styles.facilityText, { color: theme.colors.text }]}>
+                Parking
+              </Text>
             </View>
-            <View style={styles.facilityItem}>
-              <Ionicons name="wifi" size={20} color="#4CAF50" />
-              <Text style={styles.facilityText}>WiFi</Text>
+            <View
+              style={[
+                styles.facilityItem,
+                { backgroundColor: theme.colors.surface },
+              ]}
+            >
+              <Ionicons name="wifi" size={20} color={theme.colors.primary} />
+              <Text style={[styles.facilityText, { color: theme.colors.text }]}>
+                WiFi
+              </Text>
             </View>
-            <View style={styles.facilityItem}>
-              <Ionicons name="accessibility" size={20} color="#4CAF50" />
-              <Text style={styles.facilityText}>Wheelchair Access</Text>
+            <View
+              style={[
+                styles.facilityItem,
+                { backgroundColor: theme.colors.surface },
+              ]}
+            >
+              <Ionicons
+                name="accessibility"
+                size={20}
+                color={theme.colors.primary}
+              />
+              <Text style={[styles.facilityText, { color: theme.colors.text }]}>
+                Wheelchair Access
+              </Text>
             </View>
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Contact Information</Text>
-          <View style={styles.contactItem}>
-            <Ionicons name="call" size={20} color="#4CAF50" />
-            <Text style={styles.contactText}>+1 234 567 8900</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+            Contact Information
+          </Text>
+          <View
+            style={[
+              styles.contactItem,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
+            <Ionicons name="call" size={20} color={theme.colors.primary} />
+            <Text style={[styles.contactText, { color: theme.colors.text }]}>
+              +1 234 567 8900
+            </Text>
           </View>
-          <View style={styles.contactItem}>
-            <Ionicons name="mail" size={20} color="#4CAF50" />
-            <Text style={styles.contactText}>info@centralmosque.com</Text>
+          <View
+            style={[
+              styles.contactItem,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
+            <Ionicons name="mail" size={20} color={theme.colors.primary} />
+            <Text style={[styles.contactText, { color: theme.colors.text }]}>
+              info@centralmosque.com
+            </Text>
           </View>
-          <View style={styles.contactItem}>
-            <Ionicons name="globe" size={20} color="#4CAF50" />
-            <Text style={styles.contactText}>www.centralmosque.com</Text>
+          <View
+            style={[
+              styles.contactItem,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
+            <Ionicons name="globe" size={20} color={theme.colors.primary} />
+            <Text style={[styles.contactText, { color: theme.colors.text }]}>
+              www.centralmosque.com
+            </Text>
           </View>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Actions</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+            Actions
+          </Text>
 
-          <TouchableOpacity style={styles.actionButton}>
-            <Ionicons name="add-circle" size={24} color="#4CAF50" />
-            <Text style={styles.actionButtonText}>Mark as Visited</Text>
+          <TouchableOpacity
+            style={[
+              styles.actionButton,
+              { backgroundColor: theme.colors.primary },
+            ]}
+          >
+            <Ionicons name="add-circle" size={24} color="#202020" />
+            <Text style={[styles.actionButtonText, { color: '#202020' }]}>
+              Mark as Visited
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionButton}>
-            <Ionicons name="star" size={24} color="#4CAF50" />
-            <Text style={styles.actionButtonText}>Rate This Mosque</Text>
+          <TouchableOpacity
+            style={[
+              styles.actionButton,
+              { backgroundColor: theme.colors.primary },
+            ]}
+          >
+            <Ionicons name="star" size={24} color="#202020" />
+            <Text style={[styles.actionButtonText, { color: '#202020' }]}>
+              Rate This Mosque
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionButton}>
-            <Ionicons name="share" size={24} color="#4CAF50" />
-            <Text style={styles.actionButtonText}>Share with Friends</Text>
+          <TouchableOpacity
+            style={[
+              styles.actionButton,
+              { backgroundColor: theme.colors.primary },
+            ]}
+          >
+            <Ionicons name="share" size={24} color="#202020" />
+            <Text style={[styles.actionButtonText, { color: '#202020' }]}>
+              Share with Friends
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.actionButton}>
-            <Ionicons name="navigate" size={24} color="#4CAF50" />
-            <Text style={styles.actionButtonText}>Get Directions</Text>
+          <TouchableOpacity
+            style={[
+              styles.actionButton,
+              { backgroundColor: theme.colors.primary },
+            ]}
+          >
+            <Ionicons name="navigate" size={24} color="#202020" />
+            <Text style={[styles.actionButtonText, { color: '#202020' }]}>
+              Get Directions
+            </Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Recent Reviews</Text>
+          <Text style={[styles.sectionTitle, { color: theme.colors.text }]}>
+            Recent Reviews
+          </Text>
 
-          <View style={styles.reviewCard}>
+          <View
+            style={[
+              styles.reviewCard,
+              { backgroundColor: theme.colors.surface },
+            ]}
+          >
             <View style={styles.reviewHeader}>
               <View style={styles.reviewerInfo}>
-                <View style={styles.reviewerAvatar}>
-                  <Text style={styles.reviewerAvatarText}>A</Text>
+                <View
+                  style={[
+                    styles.reviewerAvatar,
+                    { backgroundColor: theme.colors.primary },
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.reviewerAvatarText,
+                      { color: theme.colors.secondary },
+                    ]}
+                  >
+                    A
+                  </Text>
                 </View>
                 <View>
-                  <Text style={styles.reviewerName}>Ahmed Ali</Text>
+                  <Text
+                    style={[styles.reviewerName, { color: theme.colors.text }]}
+                  >
+                    Ahmed Ali
+                  </Text>
                   <View style={styles.reviewStars}>
-                    <Ionicons name="star" size={12} color="#FFD700" />
-                    <Ionicons name="star" size={12} color="#FFD700" />
-                    <Ionicons name="star" size={12} color="#FFD700" />
-                    <Ionicons name="star" size={12} color="#FFD700" />
-                    <Ionicons name="star" size={12} color="#FFD700" />
+                    <Ionicons
+                      name="star"
+                      size={12}
+                      color={theme.colors.warning}
+                    />
+                    <Ionicons
+                      name="star"
+                      size={12}
+                      color={theme.colors.warning}
+                    />
+                    <Ionicons
+                      name="star"
+                      size={12}
+                      color={theme.colors.warning}
+                    />
+                    <Ionicons
+                      name="star"
+                      size={12}
+                      color={theme.colors.warning}
+                    />
+                    <Ionicons
+                      name="star"
+                      size={12}
+                      color={theme.colors.warning}
+                    />
                   </View>
                 </View>
               </View>
-              <Text style={styles.reviewDate}>2 days ago</Text>
+              <Text
+                style={[
+                  styles.reviewDate,
+                  { color: theme.colors.textSecondary },
+                ]}
+              >
+                2 days ago
+              </Text>
             </View>
-            <Text style={styles.reviewText}>
+            <Text
+              style={[styles.reviewText, { color: theme.colors.textSecondary }]}
+            >
               Beautiful mosque with excellent facilities. The prayer area is
               spacious and well-maintained.
             </Text>
@@ -152,13 +398,11 @@ export default function MosqueDetailsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
   },
   content: {
     flex: 1,
   },
   header: {
-    backgroundColor: '#4CAF50',
     padding: 20,
     flexDirection: 'row',
     alignItems: 'center',
@@ -167,7 +411,6 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: 'rgba(255,255,255,0.2)',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 15,
@@ -178,12 +421,10 @@ const styles = StyleSheet.create({
   mosqueName: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#fff',
     marginBottom: 5,
   },
   mosqueAddress: {
     fontSize: 14,
-    color: '#e8f5e8',
     marginBottom: 8,
   },
   ratingContainer: {
@@ -193,7 +434,6 @@ const styles = StyleSheet.create({
   rating: {
     marginLeft: 5,
     fontSize: 14,
-    color: '#e8f5e8',
   },
   section: {
     margin: 15,
@@ -202,49 +442,27 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 15,
-    color: '#333',
   },
   prayerTimesGrid: {
-    backgroundColor: '#fff',
     borderRadius: 10,
     padding: 15,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   prayerTimeItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingVertical: 8,
     borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
   },
   prayerName: {
     fontSize: 16,
-    color: '#333',
   },
   prayerTime: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#4CAF50',
   },
   facilitiesContainer: {
-    backgroundColor: '#fff',
     borderRadius: 10,
     padding: 15,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   facilityItem: {
     flexDirection: 'row',
@@ -254,62 +472,32 @@ const styles = StyleSheet.create({
   facilityText: {
     marginLeft: 10,
     fontSize: 16,
-    color: '#333',
   },
   contactItem: {
-    backgroundColor: '#fff',
     padding: 15,
     borderRadius: 10,
     marginBottom: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   contactText: {
     marginLeft: 10,
     fontSize: 16,
-    color: '#333',
   },
   actionButton: {
-    backgroundColor: '#fff',
     padding: 15,
     borderRadius: 10,
     marginBottom: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   actionButtonText: {
     marginLeft: 10,
     fontSize: 16,
-    color: '#333',
   },
   reviewCard: {
-    backgroundColor: '#fff',
     padding: 15,
     borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
-    elevation: 5,
   },
   reviewHeader: {
     flexDirection: 'row',
@@ -325,20 +513,17 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
-    backgroundColor: '#4CAF50',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 10,
   },
   reviewerAvatarText: {
-    color: '#fff',
     fontSize: 12,
     fontWeight: 'bold',
   },
   reviewerName: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#333',
     marginBottom: 2,
   },
   reviewStars: {
@@ -346,11 +531,9 @@ const styles = StyleSheet.create({
   },
   reviewDate: {
     fontSize: 12,
-    color: '#999',
   },
   reviewText: {
     fontSize: 14,
-    color: '#666',
     lineHeight: 20,
   },
 });
