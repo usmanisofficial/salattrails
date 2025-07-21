@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../config/ThemeContext';
+import { useTheme } from '../hooks/useTheme';
 
 const ThemeToggle: React.FC = () => {
   const { theme, themeMode, setThemeMode, isDark } = useTheme();

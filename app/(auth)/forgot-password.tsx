@@ -13,11 +13,11 @@ import {
 import { Link, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../config/theme';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 
 export default function ForgotPasswordScreen() {
   const [email, setEmail] = useState('');
-  const { forgotPassword, isLoading } = useAuth();
+  const { resetPassword, isLoading } = useAuth();
 
   const handleResetPassword = async () => {
     if (!email) {
@@ -31,7 +31,7 @@ export default function ForgotPasswordScreen() {
     }
 
     try {
-      await forgotPassword(email);
+      await resetPassword(email);
       Alert.alert(
         'Success',
         'Password reset instructions have been sent to your email address.',

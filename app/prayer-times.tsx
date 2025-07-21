@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from './config/ThemeContext';
+import { useTheme } from './hooks/useTheme';
 import type { Theme } from './config/theme';
 
 export default function PrayerTimesScreen() {

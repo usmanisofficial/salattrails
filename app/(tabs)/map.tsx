@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../config/ThemeContext';
+import { useTheme } from '../hooks/useTheme';
 import { router } from 'expo-router';
 
 export default function MapScreen() {

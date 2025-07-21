@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '../app/config/ThemeContext';
+import { useTheme } from '../app/hooks/useTheme';
 
 interface LoadingScreenProps {
   message?: string;

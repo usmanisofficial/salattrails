@@ -8,11 +8,27 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-//use theme from config/theme.ts
-import { useTheme } from '../config/ThemeContext';
+import { useAppSelector, useAppDispatch } from '../store/hooks';
+import {
+  fetchNearbyMosques,
+  fetchPopularMosques,
+  searchMosques,
+  setSearchQuery,
+} from '../store/slices/mosqueSlice';
+import { useEffect } from 'react';
+
 export default function DiscoverScreen() {
-  const { theme } = useTheme();
+  const dispatch = useAppDispatch();
+  const { theme } = useAppSelector((state) => state.theme);
+  const { nearbyMosques, popularMosques, searchQuery, isLoading } =
+    useAppSelector((state) => state.mosque);
+
   const styles = createStyles(theme);
+
+  useEffect(() => {
+    dispatch(fetchNearbyMosques());
+    dispatch(fetchPopularMosques());
+  }, [dispatch]);
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
@@ -26,6 +42,13 @@ export default function DiscoverScreen() {
             style={styles.searchInput}
             placeholder="Search for mosques..."
             placeholderTextColor={theme.colors.textSecondary}
+            value={searchQuery}
+            onChangeText={(text) => {
+              dispatch(setSearchQuery(text));
+              if (text.trim()) {
+                dispatch(searchMosques(text));
+              }
+            }}
           />
         </View>
         <TouchableOpacity
@@ -41,36 +64,50 @@ export default function DiscoverScreen() {
       <ScrollView style={styles.content}>
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Nearby Mosques</Text>
-          <View style={styles.mosqueCard}>
-            <View style={styles.mosqueInfo}>
-              <Text style={styles.mosqueName}>Central Mosque</Text>
-              <Text style={styles.mosqueAddress}>123 Main Street, City</Text>
-              <Text style={styles.mosqueDistance}>0.5 km away</Text>
-            </View>
-            <TouchableOpacity
-              style={styles.viewButton}
-              onPress={() => router.push('/mosque-details')}
-            >
-              <Text style={styles.viewButtonText}>View</Text>
-            </TouchableOpacity>
-          </View>
+          {isLoading ? (
+            <Text style={styles.loadingText}>Loading nearby mosques...</Text>
+          ) : (
+            nearbyMosques.map((mosque) => (
+              <View key={mosque.id} style={styles.mosqueCard}>
+                <View style={styles.mosqueInfo}>
+                  <Text style={styles.mosqueName}>{mosque.name}</Text>
+                  <Text style={styles.mosqueAddress}>{mosque.address}</Text>
+                  <Text style={styles.mosqueDistance}>{mosque.distance}</Text>
+                </View>
+                <TouchableOpacity
+                  style={styles.viewButton}
+                  onPress={() => router.push('/mosque-details')}
+                >
+                  <Text style={styles.viewButtonText}>View</Text>
+                </TouchableOpacity>
+              </View>
+            ))
+          )}
         </View>
 
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Popular Mosques</Text>
-          <View style={styles.mosqueCard}>
-            <View style={styles.mosqueInfo}>
-              <Text style={styles.mosqueName}>Grand Mosque</Text>
-              <Text style={styles.mosqueAddress}>456 Oak Avenue, City</Text>
-              <Text style={styles.mosqueRating}>⭐ 4.8 (120 reviews)</Text>
-            </View>
-            <TouchableOpacity
-              style={styles.viewButton}
-              onPress={() => router.push('/mosque-details')}
-            >
-              <Text style={styles.viewButtonText}>View</Text>
-            </TouchableOpacity>
-          </View>
+          {isLoading ? (
+            <Text style={styles.loadingText}>Loading popular mosques...</Text>
+          ) : (
+            popularMosques.map((mosque) => (
+              <View key={mosque.id} style={styles.mosqueCard}>
+                <View style={styles.mosqueInfo}>
+                  <Text style={styles.mosqueName}>{mosque.name}</Text>
+                  <Text style={styles.mosqueAddress}>{mosque.address}</Text>
+                  <Text style={styles.mosqueRating}>
+                    ⭐ {mosque.rating} ({mosque.reviewCount} reviews)
+                  </Text>
+                </View>
+                <TouchableOpacity
+                  style={styles.viewButton}
+                  onPress={() => router.push('/mosque-details')}
+                >
+                  <Text style={styles.viewButtonText}>View</Text>
+                </TouchableOpacity>
+              </View>
+            ))
+          )}
         </View>
 
         <View style={styles.section}>
@@ -226,5 +263,11 @@ const createStyles = (theme: any) =>
       fontSize: theme.typography.fontSize.sm,
       fontWeight: theme.typography.fontWeight.bold,
       color: theme.colors.text,
+    },
+    loadingText: {
+      fontSize: theme.typography.fontSize.sm,
+      color: theme.colors.textSecondary,
+      textAlign: 'center',
+      padding: theme.spacing.md,
     },
   });

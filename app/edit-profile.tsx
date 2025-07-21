@@ -12,8 +12,8 @@ import {
   Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useAuth } from '../contexts/AuthContext';
-import { useTheme } from './config/ThemeContext';
+import { useAuth } from './hooks/useAuth';
+import { useTheme } from './hooks/useTheme';
 
 export default function EditProfileScreen() {
   const { user } = useAuth();

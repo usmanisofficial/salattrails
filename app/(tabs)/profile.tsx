@@ -7,9 +7,9 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 import { router } from 'expo-router';
-import { useTheme } from '../config/ThemeContext';
+import { useTheme } from '../hooks/useTheme';
 
 export default function ProfileScreen() {
   const { user, logout } = useAuth();

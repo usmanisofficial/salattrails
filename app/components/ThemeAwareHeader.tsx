@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from '../config/ThemeContext';
+import { useTheme } from '../hooks/useTheme';
 
 const useThemeAwareHeader = () => {
   const { theme } = useTheme();

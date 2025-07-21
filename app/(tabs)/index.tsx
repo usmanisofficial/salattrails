@@ -7,10 +7,12 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-import { useTheme } from '../config/ThemeContext';
+import { useAppSelector } from '../store/hooks';
+import { useAuth } from '../hooks/useAuth';
 
 export default function HomeScreen() {
-  const { theme } = useTheme();
+  const { theme } = useAppSelector((state) => state.theme);
+  const { user } = useAuth();
   const styles = createStyles(theme);
 
   return (
@@ -60,7 +62,7 @@ export default function HomeScreen() {
           </View>
           <View style={styles.statCard}>
             <Text style={styles.statNumber}>0</Text>
-            <Text style={styles.statLabel}>Countries</Text>
+            <Text style={styles.statLabel}>Favorites</Text>
           </View>
         </View>
       </View>

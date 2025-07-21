@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from './config/ThemeContext';
+import { useTheme } from './hooks/useTheme';
 
 export default function AddMosqueScreen() {
   const { theme } = useTheme();
