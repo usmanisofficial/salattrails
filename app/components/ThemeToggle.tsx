@@ -1,37 +1,81 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '../config/ThemeContext';
 
-export const ThemeToggle: React.FC = () => {
+const ThemeToggle: React.FC = () => {
   const { theme, themeMode, setThemeMode, isDark } = useTheme();
 
-  const toggleTheme = () => {
-    const newMode = isDark ? 'light' : 'dark';
-    setThemeMode(newMode);
+  const getThemeModeDisplayName = (mode: string) => {
+    switch (mode) {
+      case 'light':
+        return 'Light Mode';
+      case 'dark':
+        return 'Dark Mode';
+      case 'system':
+        return 'System Theme';
+      default:
+        return 'System Theme';
+    }
+  };
+
+  const getThemeModeIcon = (mode: string) => {
+    switch (mode) {
+      case 'light':
+        return 'sunny';
+      case 'dark':
+        return 'moon';
+      case 'system':
+        return 'settings';
+      default:
+        return 'settings';
+    }
+  };
+
+  const showThemeOptions = () => {
+    Alert.alert('Choose Theme', 'Select your preferred theme mode', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Light Mode',
+        onPress: () => setThemeMode('light'),
+      },
+      {
+        text: 'Dark Mode',
+        onPress: () => setThemeMode('dark'),
+      },
+      {
+        text: 'System Theme',
+        onPress: () => setThemeMode('system'),
+      },
+    ]);
   };
 
   return (
     <TouchableOpacity
       style={[styles.container, { backgroundColor: theme.colors.surface }]}
-      onPress={toggleTheme}
+      onPress={showThemeOptions}
     >
       <View style={styles.content}>
         <View style={styles.iconContainer}>
           <Ionicons
-            name={isDark ? 'sunny' : 'moon'}
+            name={getThemeModeIcon(themeMode)}
             size={24}
             color={theme.colors.primary}
           />
         </View>
         <View style={styles.textContainer}>
           <Text style={[styles.title, { color: theme.colors.text }]}>
-            {isDark ? 'Light Mode' : 'Dark Mode'}
+            {getThemeModeDisplayName(themeMode)}
           </Text>
           <Text
             style={[styles.subtitle, { color: theme.colors.textSecondary }]}
           >
-            Switch to {isDark ? 'light' : 'dark'} theme
+            {themeMode === 'system'
+              ? 'Follows your device settings'
+              : `Currently using ${themeMode} theme`}
           </Text>
         </View>
         <View style={styles.arrowContainer}>
@@ -80,3 +124,5 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
 });
+
+export default ThemeToggle;

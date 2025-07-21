@@ -13,7 +13,7 @@ import {
 import { Link, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../contexts/AuthContext';
-import { theme } from '../config/theme';
+import { useTheme } from '../config/ThemeContext';
 
 export default function RegisterScreen() {
   const [name, setName] = useState('');
@@ -23,6 +23,9 @@ export default function RegisterScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { register, isLoading } = useAuth();
+  const { theme } = useTheme();
+
+  const styles = createStyles(theme);
 
   const handleRegister = async () => {
     if (!name || !email || !password || !confirmPassword) {
@@ -79,13 +82,13 @@ export default function RegisterScreen() {
               <Ionicons
                 name="person"
                 size={20}
-                color="#666"
+                color={theme.colors.textSecondary}
                 style={styles.inputIcon}
               />
               <TextInput
                 style={styles.input}
                 placeholder="Enter your full name"
-                placeholderTextColor="#999"
+                placeholderTextColor={theme.colors.textSecondary}
                 value={name}
                 onChangeText={setName}
                 autoCapitalize="words"
@@ -99,13 +102,13 @@ export default function RegisterScreen() {
               <Ionicons
                 name="mail"
                 size={20}
-                color="#666"
+                color={theme.colors.textSecondary}
                 style={styles.inputIcon}
               />
               <TextInput
                 style={styles.input}
                 placeholder="Enter your email"
-                placeholderTextColor="#999"
+                placeholderTextColor={theme.colors.textSecondary}
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
@@ -121,13 +124,13 @@ export default function RegisterScreen() {
               <Ionicons
                 name="lock-closed"
                 size={20}
-                color="#666"
+                color={theme.colors.textSecondary}
                 style={styles.inputIcon}
               />
               <TextInput
                 style={styles.input}
                 placeholder="Create a password"
-                placeholderTextColor="#999"
+                placeholderTextColor={theme.colors.textSecondary}
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry={!showPassword}
@@ -140,7 +143,7 @@ export default function RegisterScreen() {
                 <Ionicons
                   name={showPassword ? 'eye-off' : 'eye'}
                   size={20}
-                  color="#666"
+                  color={theme.colors.textSecondary}
                 />
               </TouchableOpacity>
             </View>
@@ -152,13 +155,13 @@ export default function RegisterScreen() {
               <Ionicons
                 name="lock-closed"
                 size={20}
-                color="#666"
+                color={theme.colors.textSecondary}
                 style={styles.inputIcon}
               />
               <TextInput
                 style={styles.input}
                 placeholder="Confirm your password"
-                placeholderTextColor="#999"
+                placeholderTextColor={theme.colors.textSecondary}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 secureTextEntry={!showConfirmPassword}
@@ -171,7 +174,7 @@ export default function RegisterScreen() {
                 <Ionicons
                   name={showConfirmPassword ? 'eye-off' : 'eye'}
                   size={20}
-                  color="#666"
+                  color={theme.colors.textSecondary}
                 />
               </TouchableOpacity>
             </View>
@@ -202,95 +205,95 @@ export default function RegisterScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.backgroundSecondary,
-  },
-  scrollContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    padding: theme.spacing.lg,
-  },
-  header: {
-    alignItems: 'center',
-    marginBottom: theme.spacing['2xl'],
-  },
-  title: {
-    fontSize: theme.typography.fontSize['4xl'],
-    fontWeight: theme.typography.fontWeight.bold,
-    color: theme.colors.primary,
-    marginTop: theme.spacing.sm,
-    marginBottom: theme.spacing.xs,
-  },
-  subtitle: {
-    fontSize: theme.typography.fontSize.base,
-    color: theme.colors.textSecondary,
-    textAlign: 'center',
-  },
-  form: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: theme.borderRadius.xl,
-    padding: theme.spacing.xl,
-    ...theme.shadows.lg,
-  },
-  inputGroup: {
-    marginBottom: theme.spacing.lg,
-  },
-  label: {
-    fontSize: theme.typography.fontSize.base,
-    fontWeight: theme.typography.fontWeight.bold,
-    color: theme.colors.text,
-    marginBottom: theme.spacing.sm,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.colors.backgroundSecondary,
-    borderRadius: theme.borderRadius.lg,
-    borderWidth: 1,
-    borderColor: theme.colors.border,
-  },
-  inputIcon: {
-    marginLeft: theme.spacing.md,
-  },
-  input: {
-    flex: 1,
-    padding: theme.spacing.md,
-    fontSize: theme.typography.fontSize.base,
-    color: theme.colors.text,
-  },
-  eyeIcon: {
-    padding: theme.spacing.md,
-  },
-  registerButton: {
-    backgroundColor: theme.colors.primary,
-    padding: theme.spacing.md,
-    borderRadius: theme.borderRadius.lg,
-    alignItems: 'center',
-    marginBottom: theme.spacing.lg,
-  },
-  registerButtonDisabled: {
-    backgroundColor: theme.colors.textSecondary,
-  },
-  registerButtonText: {
-    color: '#202020',
-    fontSize: theme.typography.fontSize.lg,
-    fontWeight: theme.typography.fontWeight.bold,
-  },
-
-  loginContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loginText: {
-    color: theme.colors.textSecondary,
-    fontSize: theme.typography.fontSize.base,
-  },
-  loginLink: {
-    color: theme.colors.primary,
-    fontSize: theme.typography.fontSize.base,
-    fontWeight: theme.typography.fontWeight.bold,
-  },
-});
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.backgroundSecondary,
+    },
+    scrollContent: {
+      flexGrow: 1,
+      justifyContent: 'center',
+      padding: theme.spacing.lg,
+    },
+    header: {
+      alignItems: 'center',
+      marginBottom: theme.spacing['2xl'],
+    },
+    title: {
+      fontSize: theme.typography.fontSize['4xl'],
+      fontWeight: theme.typography.fontWeight.bold,
+      color: theme.colors.primary,
+      marginTop: theme.spacing.sm,
+      marginBottom: theme.spacing.xs,
+    },
+    subtitle: {
+      fontSize: theme.typography.fontSize.base,
+      color: theme.colors.textSecondary,
+      textAlign: 'center',
+    },
+    form: {
+      backgroundColor: theme.colors.surface,
+      borderRadius: theme.borderRadius.xl,
+      padding: theme.spacing.xl,
+      ...theme.shadows.lg,
+    },
+    inputGroup: {
+      marginBottom: theme.spacing.lg,
+    },
+    label: {
+      fontSize: theme.typography.fontSize.base,
+      fontWeight: theme.typography.fontWeight.bold,
+      color: theme.colors.text,
+      marginBottom: theme.spacing.sm,
+    },
+    inputContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: theme.colors.backgroundSecondary,
+      borderRadius: theme.borderRadius.lg,
+      borderWidth: 1,
+      borderColor: theme.colors.border,
+    },
+    inputIcon: {
+      marginLeft: theme.spacing.md,
+    },
+    input: {
+      flex: 1,
+      padding: theme.spacing.md,
+      fontSize: theme.typography.fontSize.base,
+      color: theme.colors.text,
+    },
+    eyeIcon: {
+      padding: theme.spacing.md,
+    },
+    registerButton: {
+      backgroundColor: theme.colors.primary,
+      padding: theme.spacing.md,
+      borderRadius: theme.borderRadius.lg,
+      alignItems: 'center',
+      marginBottom: theme.spacing.lg,
+    },
+    registerButtonDisabled: {
+      backgroundColor: theme.colors.textSecondary,
+    },
+    registerButtonText: {
+      color: theme.colors.secondary,
+      fontSize: theme.typography.fontSize.lg,
+      fontWeight: theme.typography.fontWeight.bold,
+    },
+    loginContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    loginText: {
+      color: theme.colors.textSecondary,
+      fontSize: theme.typography.fontSize.base,
+    },
+    loginLink: {
+      color: theme.colors.primary,
+      fontSize: theme.typography.fontSize.base,
+      fontWeight: theme.typography.fontWeight.bold,
+    },
+  });

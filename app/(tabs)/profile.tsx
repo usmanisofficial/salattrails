@@ -9,10 +9,12 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../contexts/AuthContext';
 import { router } from 'expo-router';
-import { theme } from '../config/theme';
+import { useTheme } from '../config/ThemeContext';
 
 export default function ProfileScreen() {
   const { user, logout } = useAuth();
+  const { theme } = useTheme();
+  const styles = createStyles(theme);
 
   const handleLogout = async () => {
     Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
@@ -307,105 +309,106 @@ export default function ProfileScreen() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  content: {
-    flex: 1,
-  },
-  header: {
-    backgroundColor: theme.colors.surface,
-    padding: theme.spacing.lg,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: theme.spacing.sm,
-  },
-  profileInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  avatar: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: theme.colors.primary,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: theme.spacing.md,
-  },
-  avatarText: {
-    color: theme.colors.secondary,
-    fontSize: theme.typography.fontSize['2xl'],
-    fontWeight: theme.typography.fontWeight.bold,
-  },
-  userInfo: {
-    flex: 1,
-  },
-  userName: {
-    fontSize: theme.typography.fontSize.xl,
-    fontWeight: theme.typography.fontWeight.bold,
-    color: theme.colors.text,
-    marginBottom: theme.spacing.xs,
-  },
-  userEmail: {
-    fontSize: theme.typography.fontSize.sm,
-    color: theme.colors.textSecondary,
-    marginBottom: 2,
-  },
-  joinDate: {
-    fontSize: theme.typography.fontSize.xs,
-    color: theme.colors.textSecondary,
-  },
-  editButton: {
-    padding: theme.spacing.sm,
-  },
-  statsSection: {
-    flexDirection: 'row',
-    padding: theme.spacing.md,
-    backgroundColor: theme.colors.surface,
-    marginBottom: theme.spacing.sm,
-  },
-  statCard: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  statNumber: {
-    fontSize: theme.typography.fontSize['2xl'],
-    fontWeight: theme.typography.fontWeight.bold,
-    color: theme.colors.primary,
-    marginBottom: theme.spacing.xs,
-  },
-  statLabel: {
-    fontSize: theme.typography.fontSize.xs,
-    color: theme.colors.textSecondary,
-    textAlign: 'center',
-  },
-  section: {
-    margin: theme.spacing.md,
-  },
-  sectionTitle: {
-    fontSize: theme.typography.fontSize.lg,
-    fontWeight: theme.typography.fontWeight.bold,
-    marginBottom: theme.spacing.md,
-    color: theme.colors.text,
-  },
-  menuItem: {
-    backgroundColor: theme.colors.surface,
-    padding: theme.spacing.md,
-    borderRadius: theme.borderRadius.lg,
-    marginBottom: theme.spacing.sm,
-    flexDirection: 'row',
-    alignItems: 'center',
-    ...theme.shadows.sm,
-  },
-  menuText: {
-    flex: 1,
-    fontSize: theme.typography.fontSize.base,
-    color: theme.colors.text,
-    marginLeft: theme.spacing.md,
-  },
-});
+const createStyles = (theme: any) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: theme.colors.background,
+    },
+    content: {
+      flex: 1,
+    },
+    header: {
+      backgroundColor: theme.colors.surface,
+      padding: theme.spacing.lg,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: theme.spacing.sm,
+    },
+    profileInfo: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      flex: 1,
+    },
+    avatar: {
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+      backgroundColor: theme.colors.primary,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginRight: theme.spacing.md,
+    },
+    avatarText: {
+      color: theme.colors.secondary,
+      fontSize: theme.typography.fontSize['2xl'],
+      fontWeight: theme.typography.fontWeight.bold,
+    },
+    userInfo: {
+      flex: 1,
+    },
+    userName: {
+      fontSize: theme.typography.fontSize.xl,
+      fontWeight: theme.typography.fontWeight.bold,
+      color: theme.colors.text,
+      marginBottom: theme.spacing.xs,
+    },
+    userEmail: {
+      fontSize: theme.typography.fontSize.sm,
+      color: theme.colors.textSecondary,
+      marginBottom: 2,
+    },
+    joinDate: {
+      fontSize: theme.typography.fontSize.xs,
+      color: theme.colors.textSecondary,
+    },
+    editButton: {
+      padding: theme.spacing.sm,
+    },
+    statsSection: {
+      flexDirection: 'row',
+      padding: theme.spacing.md,
+      backgroundColor: theme.colors.surface,
+      marginBottom: theme.spacing.sm,
+    },
+    statCard: {
+      flex: 1,
+      alignItems: 'center',
+    },
+    statNumber: {
+      fontSize: theme.typography.fontSize['2xl'],
+      fontWeight: theme.typography.fontWeight.bold,
+      color: theme.colors.primary,
+      marginBottom: theme.spacing.xs,
+    },
+    statLabel: {
+      fontSize: theme.typography.fontSize.xs,
+      color: theme.colors.textSecondary,
+      textAlign: 'center',
+    },
+    section: {
+      margin: theme.spacing.md,
+    },
+    sectionTitle: {
+      fontSize: theme.typography.fontSize.lg,
+      fontWeight: theme.typography.fontWeight.bold,
+      marginBottom: theme.spacing.md,
+      color: theme.colors.text,
+    },
+    menuItem: {
+      backgroundColor: theme.colors.surface,
+      padding: theme.spacing.md,
+      borderRadius: theme.borderRadius.lg,
+      marginBottom: theme.spacing.sm,
+      flexDirection: 'row',
+      alignItems: 'center',
+      ...theme.shadows.sm,
+    },
+    menuText: {
+      flex: 1,
+      fontSize: theme.typography.fontSize.base,
+      color: theme.colors.text,
+      marginLeft: theme.spacing.md,
+    },
+  });

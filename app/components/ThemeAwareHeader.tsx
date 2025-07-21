@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from '../config/ThemeContext';
 
-export const useThemeAwareHeader = () => {
+const useThemeAwareHeader = () => {
   const { theme } = useTheme();
 
   return {
@@ -13,3 +13,6 @@ export const useThemeAwareHeader = () => {
     },
   };
 };
+
+export { useThemeAwareHeader };
+export default useThemeAwareHeader;

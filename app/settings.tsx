@@ -12,7 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../contexts/AuthContext';
 import { router } from 'expo-router';
 import { useTheme } from './config/ThemeContext';
-import { ThemeToggle } from './components/ThemeToggle';
+import ThemeToggle from './components/ThemeToggle';
 
 export default function SettingsScreen() {
   const { logout } = useAuth();

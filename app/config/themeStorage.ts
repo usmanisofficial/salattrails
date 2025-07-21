@@ -29,3 +29,6 @@ export const themeStorage = {
     }
   },
 };
+
+// Default export for Expo Router
+export default themeStorage;
