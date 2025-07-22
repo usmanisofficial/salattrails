@@ -15,16 +15,35 @@ export default {
     assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true,
+      bundleIdentifier: 'com.alpinebird.salattrails',
+      infoPlist: {
+        NSLocationWhenInUseUsageDescription:
+          'This app uses location to show nearby mosques and provide prayer times for your area.',
+        NSLocationAlwaysAndWhenInUseUsageDescription:
+          'This app uses location to show nearby mosques and provide prayer times for your area.',
+        ITSAppUsesNonExemptEncryption: false,
+      },
     },
     android: {
+      package: 'com.alpinebird.salattrails',
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#4CAF50',
       },
+      permissions: ['ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION'],
     },
     web: {
       favicon: './assets/images/favicon.png',
     },
+    plugins: [
+      [
+        'expo-location',
+        {
+          locationAlwaysAndWhenInUsePermission:
+            'Allow SalatTrails to use your location to show nearby mosques and provide accurate prayer times.',
+        },
+      ],
+    ],
     extra: {
       firebaseApiKey: process.env.FIREBASE_API_KEY,
       firebaseAuthDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -32,15 +51,9 @@ export default {
       firebaseStorageBucket: process.env.FIREBASE_STORAGE_BUCKET,
       firebaseMessagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
       firebaseAppId: process.env.FIREBASE_APP_ID,
-    },
-    android: {
-      adaptiveIcon: {
-        foregroundImage: './assets/images/adaptive-icon.png',
-        backgroundColor: '#4CAF50',
+      eas: {
+        projectId: '34c1df8e-fff0-40dd-9de0-832ebf004400',
       },
-    },
-    ios: {
-      supportsTablet: true,
     },
   },
 };

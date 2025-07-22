@@ -108,6 +108,63 @@ const mockMosques: Mosque[] = [
       isha: '19:50',
     },
   },
+  {
+    id: '4',
+    name: 'Islamic Center',
+    address: '321 Elm Street, City',
+    distance: '0.8 km away',
+    coordinates: { latitude: 40.7135, longitude: -74.0055 },
+    rating: 4.7,
+    reviewCount: 95,
+    facilities: [
+      'Parking',
+      'Wheelchair Access',
+      'Library',
+      'Cafeteria',
+      'Islamic School',
+    ],
+    prayerTimes: {
+      fajr: '05:28',
+      dhuhr: '12:28',
+      asr: '15:43',
+      maghrib: '18:13',
+      isha: '19:43',
+    },
+  },
+  {
+    id: '5',
+    name: 'Masjid Al-Noor',
+    address: '654 Maple Avenue, City',
+    distance: '1.5 km away',
+    coordinates: { latitude: 40.716, longitude: -74.008 },
+    rating: 4.4,
+    reviewCount: 78,
+    facilities: ['Parking', 'Wheelchair Access'],
+    prayerTimes: {
+      fajr: '05:32',
+      dhuhr: '12:32',
+      asr: '15:47',
+      maghrib: '18:17',
+      isha: '19:47',
+    },
+  },
+  {
+    id: '6',
+    name: 'Jama Masjid',
+    address: '987 Oak Street, City',
+    distance: '2.8 km away',
+    coordinates: { latitude: 40.718, longitude: -74.009 },
+    rating: 4.6,
+    reviewCount: 112,
+    facilities: ['Parking', 'Wheelchair Access', 'Library', 'Cafeteria'],
+    prayerTimes: {
+      fajr: '05:27',
+      dhuhr: '12:27',
+      asr: '15:42',
+      maghrib: '18:12',
+      isha: '19:42',
+    },
+  },
 ];
 
 // Async thunks
@@ -117,7 +174,8 @@ export const fetchNearbyMosques = createAsyncThunk(
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      return mockMosques.filter((mosque) => parseFloat(mosque.distance!) < 2);
+      // Return all mosques for better map display
+      return mockMosques;
     } catch (error: any) {
       return rejectWithValue('Failed to fetch nearby mosques');
     }
