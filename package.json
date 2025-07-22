@@ -12,7 +12,10 @@
     "lint": "expo lint",
     "update": "node scripts/publish-update.js",
     "update:preview": "node scripts/publish-update.js preview",
-    "update:development": "node scripts/publish-update.js development"
+    "update:development": "node scripts/publish-update.js development",
+    "bump-build": "node scripts/update-build-numbers.js",
+    "bump-build:ios": "node scripts/update-build-numbers.js",
+    "bump-build:android": "node scripts/update-build-numbers.js"
   },
   "jest": {
     "preset": "jest-expo"

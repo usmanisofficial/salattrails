@@ -22,6 +22,7 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: 'com.alpinebird.salattrails',
+      buildNumber: '1',
       config: {
         googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
       },
@@ -35,6 +36,7 @@ export default {
     },
     android: {
       package: 'com.alpinebird.salattrails',
+      versionCode: 1,
       config: {
         googleMaps: {
           apiKey: process.env.GOOGLE_MAPS_API_KEY,
