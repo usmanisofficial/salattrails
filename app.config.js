@@ -16,6 +16,9 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: 'com.alpinebird.salattrails',
+      config: {
+        googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+      },
       infoPlist: {
         NSLocationWhenInUseUsageDescription:
           'This app uses location to show nearby mosques and provide prayer times for your area.',
@@ -26,6 +29,11 @@ export default {
     },
     android: {
       package: 'com.alpinebird.salattrails',
+      config: {
+        googleMaps: {
+          apiKey: process.env.GOOGLE_MAPS_API_KEY,
+        },
+      },
       adaptiveIcon: {
         foregroundImage: './assets/images/adaptive-icon.png',
         backgroundColor: '#4CAF50',
