@@ -13,10 +13,12 @@ import { useAuth } from './hooks/useAuth';
 import { router } from 'expo-router';
 import { useTheme } from './hooks/useTheme';
 import ThemeToggle from './components/ThemeToggle';
+import { useUpdates } from './hooks/useUpdates';
 
 export default function SettingsScreen() {
   const { logout } = useAuth();
   const { theme } = useTheme();
+  const { checkAndApplyUpdate, isUpdating } = useUpdates();
   const [notifications, setNotifications] = useState(true);
   const [locationServices, setLocationServices] = useState(true);
 
@@ -113,6 +115,29 @@ export default function SettingsScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Appearance</Text>
           <ThemeToggle />
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>App Updates</Text>
+
+          <TouchableOpacity
+            style={styles.settingItem}
+            onPress={checkAndApplyUpdate}
+            disabled={isUpdating}
+          >
+            <View style={styles.settingInfo}>
+              <Ionicons name="refresh" size={24} color="#4CAF50" />
+              <View style={styles.settingText}>
+                <Text style={styles.settingTitle}>
+                  {isUpdating ? 'Checking for Updates...' : 'Check for Updates'}
+                </Text>
+                <Text style={styles.settingDescription}>
+                  Update to the latest version
+                </Text>
+              </View>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color="#ccc" />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.section}>

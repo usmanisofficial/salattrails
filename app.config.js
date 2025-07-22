@@ -3,10 +3,16 @@ export default {
     name: 'SalatTrails',
     slug: 'salattrails',
     scheme: 'salattrails',
-    version: '1.0.0',
+    version: '1.0.1',
     orientation: 'portrait',
     icon: './assets/images/icon.png',
     userInterfaceStyle: 'automatic',
+    runtimeVersion: {
+      policy: 'appVersion',
+    },
+    updates: {
+      url: 'https://u.expo.dev/34c1df8e-fff0-40dd-9de0-832ebf004400',
+    },
     splash: {
       image: './assets/images/splash-icon.png',
       resizeMode: 'contain',
@@ -44,6 +50,7 @@ export default {
       favicon: './assets/images/favicon.png',
     },
     plugins: [
+      'expo-updates',
       [
         'expo-location',
         {
