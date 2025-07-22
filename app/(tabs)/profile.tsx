@@ -82,7 +82,7 @@ export default function ProfileScreen() {
 
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => router.push('/(tabs)/map')}
+            onPress={() => router.push('/(tabs)/')}
           >
             <Ionicons name="map" size={24} color={theme.colors.primary} />
             <Text style={styles.menuText}>My Visited Mosques</Text>

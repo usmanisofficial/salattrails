@@ -1,143 +1,187 @@
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useTheme } from '../hooks/useTheme';
 import { router } from 'expo-router';
-import { useAppSelector } from '../store/hooks';
-import { useAuth } from '../hooks/useAuth';
 
-export default function HomeScreen() {
-  const { theme } = useAppSelector((state) => state.theme);
-  const { user } = useAuth();
-  const styles = createStyles(theme);
+export default function MapHomeScreen() {
+  const { theme } = useTheme();
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.quickActions}>
-        <Text style={styles.sectionTitle}>Quick Actions</Text>
-
-        <TouchableOpacity
-          style={styles.actionCard}
-          onPress={() => router.push('/add-mosque')}
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
+      <View
+        style={[styles.mapContainer, { backgroundColor: theme.colors.surface }]}
+      >
+        <View
+          style={[
+            styles.mapPlaceholder,
+            { backgroundColor: theme.colors.background },
+          ]}
         >
-          <Ionicons name="add-circle" size={24} color={theme.colors.primary} />
-          <Text style={styles.actionText}>Add New Prayer Location</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.actionCard}
-          onPress={() => router.push('/(tabs)/map')}
-        >
-          <Ionicons name="map" size={24} color={theme.colors.primary} />
-          <Text style={styles.actionText}>View My Map</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.actionCard}
-          onPress={() => router.push('/(tabs)/discover')}
-        >
-          <Ionicons name="search" size={24} color={theme.colors.primary} />
-          <Text style={styles.actionText}>Find Nearby Mosques</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.actionCard}
-          onPress={() => router.push('/prayer-times')}
-        >
-          <Ionicons name="time" size={24} color={theme.colors.primary} />
-          <Text style={styles.actionText}>Prayer Times</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.stats}>
-        <Text style={styles.sectionTitle}>Your Journey</Text>
-        <View style={styles.statsRow}>
-          <View style={styles.statCard}>
-            <Text style={styles.statNumber}>0</Text>
-            <Text style={styles.statLabel}>Mosques Visited</Text>
-          </View>
-          <View style={styles.statCard}>
-            <Text style={styles.statNumber}>0</Text>
-            <Text style={styles.statLabel}>Favorites</Text>
-          </View>
+          <Ionicons name="map" size={64} color={theme.colors.primary} />
+          <Text
+            style={[styles.mapPlaceholderText, { color: theme.colors.text }]}
+          >
+            Interactive Map
+          </Text>
+          <Text
+            style={[
+              styles.mapPlaceholderSubtext,
+              { color: theme.colors.textSecondary },
+            ]}
+          >
+            Discover and track your prayer locations
+          </Text>
         </View>
       </View>
-    </ScrollView>
+
+      <View
+        style={[styles.controls, { backgroundColor: theme.colors.surface }]}
+      >
+        <TouchableOpacity
+          style={styles.controlButton}
+          onPress={() => {
+            // Handle location functionality
+            console.log('Getting current location...');
+          }}
+        >
+          <Ionicons name="locate" size={20} color={theme.colors.primary} />
+          <Text
+            style={[styles.controlButtonText, { color: theme.colors.text }]}
+          >
+            My Location
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.controlButton}
+          onPress={() => router.push('/add-mosque')}
+        >
+          <Ionicons name="add" size={20} color={theme.colors.primary} />
+          <Text
+            style={[styles.controlButtonText, { color: theme.colors.text }]}
+          >
+            Add Mosque
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.controlButton}
+          onPress={() => router.push('/(tabs)/discover')}
+        >
+          <Ionicons name="search" size={20} color={theme.colors.primary} />
+          <Text
+            style={[styles.controlButtonText, { color: theme.colors.text }]}
+          >
+            Discover
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={[styles.legend, { backgroundColor: theme.colors.surface }]}>
+        <Text style={[styles.legendTitle, { color: theme.colors.text }]}>
+          Map Legend
+        </Text>
+        <View style={styles.legendItem}>
+          <View
+            style={[
+              styles.legendDot,
+              { backgroundColor: theme.colors.primary },
+            ]}
+          />
+          <Text style={[styles.legendText, { color: theme.colors.text }]}>
+            Visited Mosques
+          </Text>
+        </View>
+        <View style={styles.legendItem}>
+          <View
+            style={[styles.legendDot, { backgroundColor: theme.colors.info }]}
+          />
+          <Text style={[styles.legendText, { color: theme.colors.text }]}>
+            Nearby Mosques
+          </Text>
+        </View>
+        <View style={styles.legendItem}>
+          <View
+            style={[
+              styles.legendDot,
+              { backgroundColor: theme.colors.warning },
+            ]}
+          />
+          <Text style={[styles.legendText, { color: theme.colors.text }]}>
+            Current Location
+          </Text>
+        </View>
+      </View>
+    </View>
   );
 }
 
-const createStyles = (theme: any) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: theme.colors.background,
-    },
-    header: {
-      backgroundColor: theme.colors.primary,
-      padding: theme.spacing.lg,
-      alignItems: 'center',
-    },
-    title: {
-      fontSize: theme.typography.fontSize['3xl'],
-      fontWeight: theme.typography.fontWeight.bold,
-      color: theme.colors.secondary,
-      marginBottom: theme.spacing.xs,
-    },
-    subtitle: {
-      fontSize: theme.typography.fontSize.base,
-      color: theme.colors.secondary,
-    },
-    quickActions: {
-      padding: theme.spacing.lg,
-    },
-    sectionTitle: {
-      fontSize: theme.typography.fontSize.xl,
-      fontWeight: theme.typography.fontWeight.bold,
-      marginBottom: theme.spacing.md,
-      color: theme.colors.text,
-    },
-    actionCard: {
-      backgroundColor: theme.colors.surface,
-      padding: theme.spacing.md,
-      borderRadius: theme.borderRadius.lg,
-      marginBottom: theme.spacing.sm,
-      flexDirection: 'row',
-      alignItems: 'center',
-      ...theme.shadows.md,
-    },
-    actionText: {
-      marginLeft: theme.spacing.md,
-      fontSize: theme.typography.fontSize.base,
-      color: theme.colors.text,
-    },
-    stats: {
-      padding: theme.spacing.lg,
-    },
-    statsRow: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-    },
-    statCard: {
-      backgroundColor: theme.colors.surface,
-      padding: theme.spacing.lg,
-      borderRadius: theme.borderRadius.lg,
-      flex: 1,
-      marginHorizontal: theme.spacing.xs,
-      alignItems: 'center',
-      ...theme.shadows.md,
-    },
-    statNumber: {
-      fontSize: theme.typography.fontSize['4xl'],
-      fontWeight: theme.typography.fontWeight.bold,
-      color: theme.colors.primary,
-    },
-    statLabel: {
-      fontSize: theme.typography.fontSize.sm,
-      color: theme.colors.textSecondary,
-      marginTop: theme.spacing.xs,
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  mapContainer: {
+    flex: 1,
+    margin: 10,
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  mapPlaceholder: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  mapPlaceholderText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 10,
+  },
+  mapPlaceholderSubtext: {
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 5,
+    paddingHorizontal: 20,
+  },
+  controls: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 15,
+    marginHorizontal: 10,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+  controlButton: {
+    alignItems: 'center',
+    padding: 10,
+  },
+  controlButtonText: {
+    fontSize: 12,
+    marginTop: 5,
+  },
+  legend: {
+    margin: 10,
+    padding: 15,
+    borderRadius: 10,
+  },
+  legendTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  legendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  legendDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    marginRight: 10,
+  },
+  legendText: {
+    fontSize: 14,
+  },
+});

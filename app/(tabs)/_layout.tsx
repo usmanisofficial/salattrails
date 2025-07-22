@@ -28,18 +28,18 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: 'Map',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
+            <Ionicons name="map" size={size} color={color} />
           ),
         }}
       />
       <Tabs.Screen
-        name="map"
+        name="prayer-times"
         options={{
-          title: 'Map',
+          title: 'Prayer Times',
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="map" size={size} color={color} />
+            <Ionicons name="time" size={size} color={color} />
           ),
         }}
       />
