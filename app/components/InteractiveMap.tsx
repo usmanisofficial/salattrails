@@ -227,7 +227,7 @@ export default function InteractiveMap() {
 
       {/* Map Legend */}
       <View style={styles.legend}>
-        <Text style={styles.legendTitle}>Map Legend</Text>
+        <Text style={styles.legendTitle}>Map Details</Text>
         <View style={styles.legendItem}>
           <View
             style={[
