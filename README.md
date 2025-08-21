@@ -83,26 +83,33 @@ SalatTrails helps Muslims track their spiritual journey by documenting the mosqu
 
    **Note**: The project uses Redux Toolkit and React Redux for state management. These dependencies are already included in the package.json.
 
-3. **Set up Firebase**
+3. **Set up Firebase Configuration**
 
    - Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
    - Enable Authentication with Email/Password provider
    - Enable Firestore Database
    - Enable Storage (if needed)
-   - Copy your Firebase config to `config/firebase.ts`
 
-4. **Environment Variables (Optional)**
+4. **Configure Environment Variables (Required)**
 
-   Create a `.env` file in the root directory:
+   ⚠️ **SECURITY NOTICE**: This project now requires environment variables for Firebase configuration to protect sensitive credentials.
 
-   ```env
-   FIREBASE_API_KEY=your_api_key
-   FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-   FIREBASE_PROJECT_ID=your_project_id
-   FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-   FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-   FIREBASE_APP_ID=your_app_id
-   ```
+   1. Copy the example environment file:
+      ```bash
+      cp env.example .env
+      ```
+
+   2. Fill in your actual Firebase configuration values in `.env`:
+      ```env
+      FIREBASE_API_KEY=your_actual_api_key
+      FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+      FIREBASE_PROJECT_ID=your_project_id
+      FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+      FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+      FIREBASE_APP_ID=your_app_id
+      ```
+
+   3. **Never commit the `.env` file** - it's already included in `.gitignore`
 
 5. **Start the development server**
 
